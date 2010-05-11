@@ -2,6 +2,7 @@
 
 #ifndef ushort
 #include <cstdlib>
+#define ushort unsigned short
 #endif
 
 #include <string.h>
