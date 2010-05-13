@@ -1,6 +1,3 @@
-/**
- * Created By David Coss, 2007
- */
 #ifndef COMPLEX_CPP
 #define COMPLEX_CPP
 
@@ -25,7 +22,8 @@ namespace math
 
   /**
    * Complex Number Object
-   * Created By David Coss, 2007
+   * Copyright David Coss 2010
+   * Copying and distributing are permitted under the terms of the GNU Public License version 3 (see COPYING or http://www.gnu.org/licenses/gpl.txt).
    */
 class Complex
 {

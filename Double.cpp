@@ -2,12 +2,17 @@
 
 Double::Double(const char * bean)
 {
-  Double * temp = new Double(DString(bean));
-  mydoubleValue = temp->doubleValue();
   mydoubleValue2 = 0.0;
-  mydoubleValue3 = 0.0;
-  delete temp;
-  temp = 0;
+  mydoubleValue3 = 0.0;  
+  try{
+    mydoubleValue = atof(bean);
+    if(mydoubleValue == 0 && strchr(bean,"0") != 0)
+      throw DavidException(strcat(bean," is not a valid number."),DavidException::FORMAT_ERROR_CODE);
+  }
+  catch(...)
+    {
+      throw DavidException(strcat(bean," is not a valid number."),DavidException::FORMAT_ERROR_CODE);
+    }
 }
 
 Double::Double(const Double& f)
@@ -31,58 +36,7 @@ Double::Double(const DString& _string)
     {
       throw DavidException(_string + " is not a valid number.",DavidException::FORMAT_ERROR_CODE);
     }
-  
-  /* Old non-STL way of doing things
-  bool negSign = _string.charAt(0) == '-';
-  DString string;
-  if(negSign || _string.charAt(0) == '+')
-    string = _string.substring(1);
-  else
-    string = _string;
-  int len = string.length();
-  int decimalLocation = string.length();
-  for(int j = 0;j<len;j++)
-    if(string.charAt(j) == '.')
-      decimalLocation = j;
-  
-  if(string.indexOf('e') > -1 || string.indexOf('E') > -1)
-    {
-      int eLoc = 0;
-      if(string.indexOf('e') > -1)
-	eLoc = string.indexOf('e');
-      else
-	eLoc = string.indexOf('E');
-      
-      Double coefficient(string.substring(0,eLoc));
-      Double powerOf10(string.substring(eLoc+1));
-      mydoubleValue = coefficient.doubleValue() * Double::exponent(10,powerOf10.doubleValue());
-      
-      if(negSign)
-	mydoubleValue *= -1;
-      
-      return;
-    }
-  
-  for(int i = 0;i<len;i++)
-    {
-      if((string.charAt(i) != '\0') && (string.charAt(i) != '.'))
-	{
-	  double exp = 0;
-	  if(i < decimalLocation)
-	    exp = Double::exponent(10,decimalLocation-i-1);
-	  else
-	    exp = Double::exponent(10,decimalLocation-i);
-	  try{
-	    mydoubleValue += ((int) Double::getIntVal(string.charAt(i)))*exp;
-	  }
-	  catch(DavidException de)
-	    {
-	      throw de;
-	    }
-	}
-    }
-  if(negSign)
-    mydoubleValue *= -1;/**/
+
 }
 
 Double::Double(const double i)
@@ -295,23 +249,23 @@ DString Double::toDString(std::ostringstream& ss) const
 
 	}
 
-	double Double::parseRoot(double x, double root)
+double Double::parseRoot(double x, double root)
+{
+  
+  if(root == 2)
+    return sqrt(x);
+  
+  const int ITERATIONS = 100000;
+  if(x<0)
+    throw DavidException("Result of this root is an imaginary number.",DavidException::IMAGINARY_NUMBER_ERROR_CODE);
+  double num = x; //Number to take square root of
+  double r = 1; //Any number actually works for r
+  for (int i = 0; i < ITERATIONS; i++) 
     {
-
-      if(root == 2)
-	return sqrt(x);
-
-	    const int ITERATIONS = 100000;
-            if(x<0)
-				throw DavidException(DString("sqrt[")+Double(x).toDString()+DString("] is an imaginary number."),DavidException::IMAGINARY_NUMBER_ERROR_CODE);
-	    double num = x; //Number to take square root of
-	    double r = 1; //Any number actually works for r
-	    for (int i = 0; i < ITERATIONS; i++) 
-	    {
-		    r = ((num / r)+r)/root;
-	    }
-	    return r;
+      r = ((num / r)+r)/root;
     }
+  return r;
+}
 
 int Double::toInt()
 {
@@ -494,27 +448,6 @@ int Double::stringToNBase(DString number, int base)
     }
 
   return binary;
-}
-
-
-DString& Double::nBaseToString(int number)
-{
-  DString returnMe;
-  unsigned int junx;
-  junx = 0x80000000;
-
-  while(junx)
-    {
-      if(number & junx)
-	returnMe += "1";
-      else
-	returnMe += "0";
-      
-      junx >>= 1;
-    }
-
-  return returnMe;
-
 }
 
 

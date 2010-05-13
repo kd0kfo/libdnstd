@@ -3,6 +3,11 @@
 
 #include "DString.h"
 
+ /**
+   * Character wrapper
+   * Copyright David Coss 2010
+   * Copying and distributing are permitted under the terms of the GNU Public License version 3 (see COPYING or http://www.gnu.org/licenses/gpl.txt).
+   */
 class Character
 {
 	public:

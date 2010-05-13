@@ -12,9 +12,10 @@
 
 /**
  * My own String Handler.
- * The string is saved as a const char *. However, this class contains all of the 
- * methods useful for a string (eg concatenation, searching, substring).
- * Created By David Coss, 2007
+ * The string is saved as a std::string. This class was created for mostly academic reasons on my part. It really should not be used as a replacement for std::string.
+ *
+ * Created By David Coss, 2010
+ * Copying and distributing are permitted under the terms of the GNU Public License version 3(see COPYING or http://www.gnu.org/licenses/gpl.txt).
  */
 class DString
 {
@@ -22,8 +23,8 @@ class DString
 		
 		/**
 		 * Main constructor.
-		 * A DString is created based on the provided const char* string.
-		 * @param cString const char* string to be used.
+		 * A DString is created based on the provided std::string.
+		 * @param cString std::string to be used.
 		 */
 		DString(const std::string& cstring);
 
@@ -79,12 +80,13 @@ class DString
 		 */
 		unsigned short length() const { return itsString.size(); }
 
+		/**
+		 * Gives the length of the string.
+		 */
 		unsigned short size() const { return itsString.length(); }
 
 		/**
-		 * Gives the char* equivalent of the string.
-		 * Note: this is a constant pointer, cannot be changed (to be safe).
-		 * @return char*
+		 * Gives the string as a std::string object.
 		 * @see toCharArray()
 		 */
 		std::string getString() const { return itsString; }
@@ -162,15 +164,13 @@ class DString
 
 		/**
 		 * Converts the string to all lower case letters.
-		 * @return DString.
 		 */
-		void toLowerCase()  ;
+		void toLowerCase();
 		
 		/**
 		 * Converts the string to all capitol letters.
-		 * @return DString.
 		 */
-		void toUpperCase()  ;
+		void toUpperCase();
 
 		/** 
 		 * Determines whether the string contains the given character.

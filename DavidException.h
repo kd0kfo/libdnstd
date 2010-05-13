@@ -7,8 +7,9 @@
 
 /**
  * Exception Object.
- * This is my customized Exception Object. I use it anytime there is an exception needing to be thrown.
- * Created By David Coss, 2007
+ * This is my customized Exception Object. I use it anytime there is an exception needing to be thrown. A few error codes for things I have written are provided.
+ * Copyright David Coss 2010
+ * Copying and distributing are permitted under the terms of the GNU Public License version 3(see COPYING or http://www.gnu.org/licenses/gpl.txt).
  */
 class DavidException
 {

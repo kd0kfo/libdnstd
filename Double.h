@@ -21,9 +21,10 @@
 /**
  * My own Double class wrapper.
  * 
- * Contains 3 doubles, as needed by various cosmological applications.
+ * Contains 3 doubles. This provides a convenient way of handling 3D coordinates.
  * This class is capable of parsing a string (and/or DString).
  * Copyright 2010 David Coss
+ * Copying and distributing are permitted under the terms of the GNU Public License version 3 (see COPYING or http://www.gnu.org/licenses/gpl.txt).
  */
 class Double
 	{
@@ -62,8 +63,6 @@ class Double
 			/**
 			 * Triplet Double Constructor.
 			 * This constructor creates a Double wrapper that can hold three doubles.
-			 * This is not used often, but it makes Double compatable with Triplet templates.
-			 * @see Triplet
 			 */
 			Double(const double, const double, const double);
 
@@ -107,7 +106,17 @@ class Double
 			Double operator-(const double&);
 			void operator-=(const Double&);
 			void operator-=(const double);
+
+			/**
+			 * Compares each doubleValue independently, according to:
+			 * mydoubleValue != rhs.doubleValue() || mydoubleValue2 != rhs.getValue(1) || mydoubleValue3 !=  rhs.getValue(2)
+			 */
 			bool operator!=(const Double& rhs) const {return mydoubleValue != rhs.doubleValue() || mydoubleValue2 != rhs.getValue(1) || mydoubleValue3 !=  rhs.getValue(2);}
+
+			/**
+			 * Compares each doubleValue independently, according to:
+			 * mydoubleValue != rhs.doubleValue() || mydoubleValue2 != rhs.getValue(1) || mydoubleValue3 !=  rhs.getValue(2)
+			 */
 			bool operator!=(const double rhs) const { return mydoubleValue != rhs;}
 			
 			/**
@@ -119,16 +128,60 @@ class Double
 			Double & operator=(const double&);
 			bool operator==(const Double&) const;
 			bool operator==(const double) const ;
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator<=(const double f)const{return mydoubleValue <= f;}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator<=(const int f)const{return mydoubleValue <= f;}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator<=(const Double& f)const{return mydoubleValue <= f.doubleValue();}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator>=(const double f)const{return mydoubleValue >= f;}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator>=(const int f)const{return mydoubleValue >= f;}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator>=(const Double& f)const{return mydoubleValue >= f.doubleValue();}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator<(const Double& f) const{return (mydoubleValue < f.doubleValue());}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator<(const double f) const{return (mydoubleValue < f);}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator>(const Double& f) const{return (mydoubleValue > f.doubleValue());}
+
+			/**
+			 * Compares the first elements in the double
+			 */ 
 			bool operator>(const double f) const{return (mydoubleValue > f);}
+			
+			/**
+			 * Casts the double to a DString, using toDString();
+			 */
 			operator DString() const{return toDString();}
 
 			/**
@@ -152,7 +205,7 @@ class Double
 			
 
 			/**
-			 * Gives the double value of the Double.
+			 * Gives the double value of the Double's first element.
 			 * @return double.
 			 */
 			double doubleValue() const { return mydoubleValue; }
@@ -252,12 +305,6 @@ class Double
 			 */
 			static int stringToNBase(DString number, int base);
 			
-			/**
-			 * DOES NOT WORK!!! REMOVE ME!!!
-			 * Changes a number of a given base to a DString
-			 */
-			static DString& nBaseToString(int number);
-
 			/**
 			 * Parses a DString to a double
 			 * Note: if the string is not a valid, real number, a DavidException is thrown.

@@ -204,5 +204,5 @@ DString Binary::toDString() const
 	return bean;
 }
 
-}//end of namespace decl.
+}//end of namespace math
 	

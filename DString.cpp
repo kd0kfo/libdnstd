@@ -84,7 +84,6 @@ void DString::operator+=(const char ch)
 
 int DString::operator==(const DString& bean) const
 {
-	//return (bean.getString() == itsString);
 	return itsString.compare(bean.itsString) == 0;
 }
 
