@@ -188,6 +188,11 @@ double Complex::modulus() const
   return sqrt(modSquared);
 }
 
+double Complex::phaseAngle() const
+{
+  return atan2(Im,Re);
+}
+
 void Complex::setValue(int i, Complex value)
 {
   Re = value.getRealPart();

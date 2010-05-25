@@ -132,6 +132,12 @@ public:
 	double modulus() const;
 	
 	/**
+	 * Returns the phase angle of the complex number
+	 * based on atan2(Imaginary,Real);
+	 */
+	double phaseAngle() const;
+
+	/**
 	 * Returns the Value of the complex number.
 	 * Note the parameter is redundant. It's used to uniformity with other objects.
 	 * @returns Complex number
@@ -154,7 +160,8 @@ private:
 };
 
 
-
+ double abs(const math::Complex& c){return c.modulus();}
+ double arg(const math::Complex& c){return c.phaseAngle();}
 
 }
 
