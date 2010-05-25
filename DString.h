@@ -1,3 +1,6 @@
+#ifndef DSTRING_CPP
+#define DSTRING_CPP
+
 #include <iostream>
 
 #ifndef ushort
@@ -7,8 +10,6 @@
 
 #include <string.h>
 
-#ifndef DSTRING_CPP
-#define DSTRING_CPP
 
 /**
  * My own String Handler.
