@@ -160,10 +160,10 @@ private:
 };
 
 
- double abs(const math::Complex& c){return c.modulus();}
- double arg(const math::Complex& c){return c.phaseAngle();}
-
 }
+double abs(const math::Complex& c);
+double arg(const math::Complex& c);
+
 
 
 #endif

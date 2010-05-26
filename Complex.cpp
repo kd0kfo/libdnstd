@@ -244,4 +244,7 @@ Double Complex::toDouble() const
 
 }//end math
 
+double abs(const math::Complex& c){return c.modulus();}
+double arg(const math::Complex& c){return c.phaseAngle();}
+
 
