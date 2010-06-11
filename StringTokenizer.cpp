@@ -1,127 +1,77 @@
 #include "StringTokenizer.h"
 
-utils::StringTokenizer::~StringTokenizer()
+utils::StringTokenizer::StringTokenizer(const std::string& string)
 	{
-		delete delim;
-		delim = 0;
-		delete string;
-		string = 0;
-		delete tokens;
-		tokens = 0;
+		StringTokenizer temp(string," ",false);
+		*this = temp;
 	}
 
-utils::StringTokenizer::StringTokenizer(const DString& string)
-	{
-		StringTokenizer * temp = new StringTokenizer(string," ",false);
-		*this = *temp;
-		delete temp;
-		temp = 0;
-	}
-
-utils::StringTokenizer::StringTokenizer(const DString& newString, const char * newDelim)
+utils::StringTokenizer::StringTokenizer(const std::string& newString, const char * newDelim)
 	{
 		StringTokenizer temp(newString,newDelim,false);
 		*this = temp;
 	}
 
-utils::StringTokenizer::StringTokenizer(const DString& newString, const char * newDelim, bool keepDelim)
+utils::StringTokenizer::StringTokenizer(const std::string& newString, const char * newDelim, bool keepDelim)
 	{
 		
-		string = new DString("");
-		delim = new DString("");
-		*delim = DString(newDelim);
-		*string = newString;
-		this->keepDelim = keepDelim;
-		tokens = new DArray<DString>();
-		DString * tempString = 0;
-		for(ushort i=0;i<string->length();i++)
-		{
-			if(delim->contains(newString[i]))
-			{
-				if(tempString != 0)
-					tokens->put(*tempString);
-				delete tempString;
-				tempString = 0;
-				if(keepDelim)
-				{
-					DString tempBean((char) newString[i]);
-					tokens->put(tempBean);
-				}
-
-			}
-			else
-			{
-				if(tempString == 0)
-					tempString = new DString("");
-				*tempString += newString.charAt(i);
-			}
-		}
-		if(tempString != 0)
-			tokens->put(*tempString);
-		index = 0;
-		delete tempString;
-		tempString = 0;
+	  delim = newDelim;
+	  string = newString;
+	  this->keepDelim = keepDelim;
+	  index =  0;
+	  tokenStream << newString;
 	}
 
 utils::StringTokenizer::StringTokenizer(const StringTokenizer& rhs)
 	{
-		this->delim = new DString();
-		*delim = rhs.getDelim();
-		this->index = rhs.index;
-		this->keepDelim = rhs.keepDelim;
-		this->string = new DString(*(rhs.string));
-		this->tokens = new DArray<DString>;
-		*tokens = *(rhs.tokens);
+	  delim = rhs.getDelim();
+	  index = rhs.index;
+	  keepDelim = rhs.keepDelim;
+	  string = rhs.string;
+	  tokenStream << string;
 	}
 
 utils::StringTokenizer utils::StringTokenizer::operator=(const StringTokenizer& rhs)
 	{
-		if(this == &rhs)
-			return *this;
-		this->delim = new DString();
-		*delim = rhs.getDelim();
-		this->index = rhs.index;
-		this->keepDelim = rhs.keepDelim;
-		this->string = new DString(*(rhs.string));
-		this->tokens = new DArray<DString>;
-		*tokens = *(rhs.tokens);
-		return *this;
+	  if(this == &rhs)
+	    return *this;
+	  delim = rhs.getDelim();
+	  index = rhs.index;
+	  keepDelim = rhs.keepDelim;
+	  string = rhs.string;
+	  tokenStream << string;
+	  return *this;
 	}
 
-DString utils::StringTokenizer::nextToken(bool keepD)
+std::string utils::StringTokenizer::nextToken(bool keepD)
 	{
-		if(index >= tokens->length())
-		{
-			throw DavidException("Number of Tokens exceded",DavidException::STRING_TOKENIZER_ERROR_CODE);
-		}
-		if(keepD)
-		{
-			return tokens->get(index++);
-		}
-		else
-		{
-			if(delim->contains(tokens->get(index+1).charAt(0)))
-			{
-				index++;
-				return nextToken(keepD);
-			}
-			return tokens->get(index++);
-		}
+	  if(tokenStream.eof())
+	    throw DavidException("No more tokens in string tokenizer",DavidException::STRING_TOKENIZER_ERROR_CODE);
 
+	  std::string returnMe;
+	  if(this->string[index] == delim[0] && keepD)
+	    {
+	      index++;
+	      return delim;
+	    }
+	  
+	  getline(tokenStream,returnMe,delim[0]);
+	  index += returnMe.size();
+	  return returnMe;
 	}
 	
 bool utils::StringTokenizer::hasMoreTokens()
-	{
-		bool bln = index < tokens->length();
-		return bln;
-	}
+{
+  return !tokenStream.eof();
+}
 
-DString utils::StringTokenizer::peek()
-	{
-		DString bean = nextToken(this->keepDelim);
-		this->index -= 1;
-		return bean;
-	}
+std::string utils::StringTokenizer::peek()
+{
+  std::string bean = nextToken(this->keepDelim);
+  this->index -= 1;
+  tokenStream.seekg(-1*bean.size(),std::ios::cur);
+  return bean;
+}
 
 
 

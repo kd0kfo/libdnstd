@@ -71,6 +71,7 @@ class DString
 		int operator!=(const DString& bean) const{return !(*this == bean);}
 		int operator==(const char * bob){return *this == DString(bob);}
 		int operator!=(const char * bob){return *this != DString(bob);}
+		operator std::string(){return getString();}
 		friend std::ostream& operator<<( std::ostream&, const DString&);
 		
 		DString concat(const DString& bean){ DString tmp;tmp.itsString.append(bean.itsString);return tmp; }///< Note: Adds the new string to the right.
