@@ -19,7 +19,6 @@ utils::StringTokenizer::StringTokenizer(const std::string& newString, const char
 	  string = newString;
 	  this->keepDelim = keepDelim;
 	  index =  0;
-	  tokenStream << newString;
 	}
 
 utils::StringTokenizer::StringTokenizer(const StringTokenizer& rhs)
@@ -28,7 +27,6 @@ utils::StringTokenizer::StringTokenizer(const StringTokenizer& rhs)
 	  index = rhs.index;
 	  keepDelim = rhs.keepDelim;
 	  string = rhs.string;
-	  tokenStream << string;
 	}
 
 utils::StringTokenizer utils::StringTokenizer::operator=(const StringTokenizer& rhs)
@@ -39,37 +37,53 @@ utils::StringTokenizer utils::StringTokenizer::operator=(const StringTokenizer& 
 	  index = rhs.index;
 	  keepDelim = rhs.keepDelim;
 	  string = rhs.string;
-	  tokenStream << string;
 	  return *this;
 	}
 
 std::string utils::StringTokenizer::nextToken(bool keepD)
 	{
-	  if(tokenStream.eof())
-	    throw DavidException("No more tokens in string tokenizer",DavidException::STRING_TOKENIZER_ERROR_CODE);
+            if(index >= this->string.size())
+                throw DavidException("No more tokens in string tokenizer",DavidException::STRING_TOKENIZER_ERROR_CODE);
 
-	  std::string returnMe;
-	  if(this->string[index] == delim[0] && keepD)
-	    {
-	      index++;
-	      return delim;
-	    }
-	  
-	  getline(tokenStream,returnMe,delim[0]);
-	  index += returnMe.size();
-	  return returnMe;
+          size_t nextDelim = this->string.find_first_of(delim,index);
+          std::string returnMe;
+          if(nextDelim == std::string::npos )
+          {
+              returnMe = this->string.substr(index);
+              index = this->string.size();
+              return returnMe;
+          }
+
+            if(nextDelim == index)
+            {
+                if(keepD)
+                {
+                    return this->string.substr(index++,1);
+                }
+                else
+                {
+                    index++;
+                    if(index == this->string.size())
+                        return "";
+                    return nextToken(keepD);
+                }
+            }
+          
+          returnMe = this->string.substr(index,nextDelim-index);
+          index = nextDelim;
+          return returnMe;
 	}
 	
 bool utils::StringTokenizer::hasMoreTokens()
 {
-  return !tokenStream.eof();
+  return index < this->string.size();
 }
 
 std::string utils::StringTokenizer::peek()
 {
   std::string bean = nextToken(this->keepDelim);
-  this->index -= 1;
-  tokenStream.seekg(-1*bean.size(),std::ios::cur);
+  index -= bean.size();
+  
   return bean;
 }
 

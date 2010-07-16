@@ -1,7 +1,6 @@
 #ifndef STRINGTOKENIZER_CPP
 #define STRINGTOKENIZER_CPP
 
-#include <sstream>
 #include <string>
 
 #include "DavidException.h"
@@ -112,7 +111,6 @@ namespace utils{
   private:
     std::string delim;
     std::string string;
-    std::stringstream tokenStream;
     bool keepDelim;
     ushort index;
 
