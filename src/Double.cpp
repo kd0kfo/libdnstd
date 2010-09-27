@@ -3,15 +3,14 @@
 Double::Double(const char * bean)
 {
   mydoubleValue2 = 0.0;
-  mydoubleValue3 = 0.0;  
-  try{
-    mydoubleValue = atof(bean);
-    if(mydoubleValue == 0 && strchr(bean,"0") != 0)
-      throw DavidException(strcat(bean," is not a valid number."),DavidException::FORMAT_ERROR_CODE);
-  }
-  catch(...)
+  mydoubleValue3 = 0.0;
+  std::istringstream is(bean);
+  is >> mydoubleValue;
+  if(is.fail())
     {
-      throw DavidException(strcat(bean," is not a valid number."),DavidException::FORMAT_ERROR_CODE);
+	  std::string error = bean;
+	  error += " is not a valid number.";
+      throw DavidException(error,DavidException::FORMAT_ERROR_CODE);
     }
 }
 
@@ -27,15 +26,13 @@ Double::Double(const DString& _string)
   
   mydoubleValue2 = 0.0;
   mydoubleValue3 = 0.0;
-  try{
-    mydoubleValue = atof(_string.getString().c_str());
-    if(mydoubleValue == 0 && !_string.contains('0'))
-      throw DavidException(_string + " is not a valid number.",DavidException::FORMAT_ERROR_CODE);
-  }
-  catch(...)
-    {
-      throw DavidException(_string + " is not a valid number.",DavidException::FORMAT_ERROR_CODE);
-    }
+  std::istringstream is(_string.getString());
+	is >> mydoubleValue;
+	if(is.fail())
+	  {
+	  std::string error = _string + " is not a valid number.";
+		throw DavidException(error,DavidException::FORMAT_ERROR_CODE);
+	  }
 
 }
 
