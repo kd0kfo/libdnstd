@@ -1,17 +1,10 @@
-#ifndef NUMERICALINTEGRATION_CPP
-#define NUMERICALINTEGRATION_CPP
-
-#include <math.h>
+#ifndef NUMERICALINTEGRATION_H
+#define NUMERICALINTEGRATION_H
 
 /**
- * Calculates simpson rule for f(x,y;m) within the limits a to b, where m is the integration argument.
+ * Takes limits of integration (a,b) and calculations the integral:
+ * \int^b_a f(x;integration_parameters)dx
  */
-static double simpsonRule(double x, double y, double a, double b, double f(double x, double y, double m) );
-
-/**
- * Calculates the Composite Simpson's Rule integral for f(x,y;m), within the limits a to b, with m as the integration argument. Integration is performed over 10000 steps.
- */
-static double compSimpsonsRule(double x, double y, double a, double b, double f(double x, double y, double m) );
-
+double compSimpsonsRule(double a, double b, double *integration_parameters, double f(double* variable, double* parameters));
 #endif
 
