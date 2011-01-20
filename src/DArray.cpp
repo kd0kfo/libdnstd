@@ -176,3 +176,6 @@ namespace utils{
   }
 }			
 
+template class utils::DArray<DString>;
+#include "Double.h"
+template class utils::DArray<Double>;

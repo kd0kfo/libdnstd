@@ -210,4 +210,4 @@ template <class T> const T& DIterator<T>::peek(DString * getKeyForNext)
 }
 
 
-
+template class DHashMap<DString>;

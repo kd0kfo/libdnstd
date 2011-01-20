@@ -138,3 +138,5 @@ template <class T> DavidException DStack<T>::EMPTY_STACK = DavidException("The s
 
 }
 
+#include "Double.h"
+template class utils::DStack<Double>;
