@@ -25,7 +25,7 @@ void math::FFT::discrete(std::complex<double> * data, ushort size, int isign, un
 }
 
 
-void math::FFT::ndim_discrete(std::complex<double> * data, unsigned long * nn, int ndim, int isign,unsigned flag)
+void math::FFT::ndim_discrete(std::complex<double> * data, int * nn, int ndim, int isign,unsigned flag)
 {
   fftw_complex *in,*out;
   fftw_plan p;

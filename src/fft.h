@@ -42,7 +42,8 @@ namespace math{
     /****
      ***
      *TO BE FINISHED
-     *
+     */
+#if 0
 
     /**
      * Swaps the vales of data[x] and data[y]
@@ -50,7 +51,7 @@ namespace math{
      * @param data double array
      * @param x element to switch
      * @param y element to switch
-     * /
+     */
     static void swap(double * data, ushort x, ushort y);	
 
     /**
@@ -64,23 +65,24 @@ namespace math{
      * @param fft2 complex double array FFT of data2
      * @param size integer size of data1 and data2 (# of complex numbers in fft1 and fft2)
      * @see void discrete()
-     * /
+     */
     static void twofft(double * data1, double * data2, double * fft1 , double * fft2, ushort size);
 
     /**
      * Convolves 2 functions.
      *
      * S is the "signal" function and R is the "Response" function.
-     * /
+     */
     static void convolve(double * R, ushort Rsize, double * S, ushort Ssize, int isign, double * result,double * dummy);
 
     /**
      * Performs a DFT on a real array of data
      * @see void discrete()
-     * /
+     */
     static void realfft(double * data, ushort complexSize, int isign);
 
-    **TO BE FINISHED
+#endif
+    /**TO BE FINISHED
     */
 
     /**
@@ -91,11 +93,13 @@ namespace math{
      * @param ndim int size of nn array.
      * @param isign. 1 for Fourier Transform, -1 for Inverse Fourier Transform.
      */
-    static void ndim_discrete(std::complex<double> * data, unsigned long * nn, int ndim, int isign,unsigned flag = FFTW_ESTIMATE);
+    static void ndim_discrete(std::complex<double> * data, int * nn, int ndim, int isign,unsigned flag = FFTW_ESTIMATE);
 
     /***
      **
      * TO BE FINISHED
+     */
+#if 0
 
     /**
      * Pads the given array up to the next power of 2 with zeros.
@@ -103,7 +107,7 @@ namespace math{
      * @param array array of size N.
      * @param N int size of array.
      * @return double * size of new array is the next power of 2 above N
-     * /
+     */
     static double * pad(double * array, int N);
 
     /**
@@ -112,10 +116,11 @@ namespace math{
      * @param array array of size N.
      * @param N int size of array.
      * @return double * size of new array is the next lower power of 2 below N
-     * /
+     */
     static double * unpad(double * array, int N);
     
-    ***FINISH THIS */
+    /***FINISH THIS */
+#endif
 	 
   };//end class FFT
 

@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.63])
+AC_PREREQ([2.50])
 AC_INIT([DNSTD], [1.0], [david@davecoss.com])
 AC_CONFIG_SRCDIR([src/])
 AM_CONFIG_HEADER([config.h])
@@ -13,14 +13,17 @@ AC_PROG_CC
 AC_PROG_RANLIB
 # Checks for libraries.
 
-AC_ARG_WITH([easybmp],AS_HELP_STRING([--with-easybmp%<:%=path%:>%],[Include EasyBMP library]),with_easybmp=${withval},)
-if test x$with_easybmp != x; then
-   AC_SUBST(EASYBMP_CPPFLAGS,"-I $with_mead/include")
+AC_ARG_WITH([fftw3],AS_HELP_STRING([--with-fftw3%<:%=path%:>%],[Include FFTW3 library]),with_fftw3=${withval},with_fftw3=false)
+[case "$with_fftw3" in
+      yes) fftw3=. ;;
+      no) fftw3=false ;;
+      *) fftw3=${with_fftw3} ;;
+esac]
+if test x$fftw3 != xfalse; then
+   AC_MSG_RESULT(Compiling with fftw3)
+   AC_SUBST(FFTW3_PATH,$fftw3)
 fi
-
-#todo add fftw stuff here
-AC_SUBST(FFT_SOURCES,"")
-AC_SUBST(FFT_HEADERS,"")
+AM_CONDITIONAL([BUILD_WITH_FFTW3],[test x$fftw3 != xfalse])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h])
