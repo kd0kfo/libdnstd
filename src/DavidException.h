@@ -1,9 +1,8 @@
 #ifndef DAVIDEXCEPTION_CPP
 #define DAVIDEXCEPTION_CPP
 
-#ifndef DSTRING_CPP
-#include "DString.h"
-#endif
+#include <stdexcept>
+#include <iostream>
 
 /**
  * Exception Object.
@@ -11,92 +10,57 @@
  * Copyright David Coss 2010
  * Copying and distributing are permitted under the terms of the GNU Public License version 3(see COPYING or http://www.gnu.org/licenses/gpl.txt).
  */
-class DavidException
+class DavidException : public std::runtime_error
 {
  public:
+  enum{UNKNOWN_ERROR = 1,
+       IMAGINARY_NUMBER_ERROR_CODE,///<Incorrect Imaginary Number Format
+		     DEFAULT_ERROR_CODE,///<Default error code
+		      HASHMAP_ERROR_CODE,///<HashMap Error code
+		      LinAl_ERROR_CODE,///<LinAl Error Code
+		      DARRAY_ERROR_CODE,///<DArray Error Code
+		      STRING_TOKENIZER_ERROR_CODE,///<String Tokenizer Error
+		      MATRIX_ERROR_CODE,
+		     LTREE_ERROR_CODE,///<LinAl Error Code
+		      DSTACK_ERROR_CODE,
+		      FORMAT_ERROR_CODE,
+		      ARRAYLIST_ERROR_CODE,
+		      ALPARS_ERROR_CODE,///<LinAl Error Code
+		      DHashMap_ERROR_CODE,
+		      INVALID_ARGUMENT_ERROR_CODE,
+		      IO_ERROR_CODE,///< Input and/or Output error
+		      PLANE_OUT_OF_BOUNDS_ERROR_CODE,///<Plane Out of Bounds element requested
+		     DATA_FORMAT_ERROR,
+		      DLIST_ERROR_CODE///<Invalid DList Request
+		};
   /**
    * Main Constructor.
    * This is the default constructor.
    */
-     DavidException();
-     
-     /**
-      * Cause and Error message Constructor.
-      * This constructor sets the cause and error message.
-      * @param theCause The cause of the exception.
-      * @param theError The Error message.
-      */
-		DavidException(const DString& theCause, const DString& theErrorType);
+  DavidException() : runtime_error("Unknown Error"),errorCode(UNKNOWN_ERROR){}
+    DavidException(const std::string& error_msg) : runtime_error(error_msg),errorCode(UNKNOWN_ERROR){}
+    DavidException(const std::string& error_msg, const int& error_code) : runtime_error(error_msg),errorCode(error_code){}
+
+      DavidException(const std::string& error_msg, const std::string& deprecated, const int& error_code) : runtime_error(error_msg),errorCode(error_code){}
 		
-		/**
-		 * Cause Constructor.
-		 * This Constructor sets the Cause only.
-		 * @param theCause Cause of the Exception.
-		 */
-		DavidException(const DString& theCause);
-		
-		/**
-		 * Cause and Error message constructor. 
-		 * Same as DString, DString Constructor
-		 * @see DavidException(const DString& theCause, const DString& theErrorType)
-		 */
-		DavidException(const char *,const char *);
-
-		/**
-		 * Cause constructor. 
-		 * Same as DString Constructor
-		 * @see DavidException(const DString& theCause)
-		 */
-		DavidException(const char*);
-
-		/**
-		 * Error Code Constructor
-		 * @param errorCode ErrorCode
-		 * @see ErrorCodes Below
-		 */
-		DavidException(int errorCode);
-		DavidException(const DString& theCause, const DString& theErrorType, int errorCode);
-		DavidException(const DString& theCause,int errorCode);
-		DavidException(const char *,const char *, int errorCode);
-		DavidException(const char*, int errorCode);
-		DavidException(const DavidException&);
-		~DavidException();
-
-		static const int IMAGINARY_NUMBER_ERROR_CODE = -1;///<Incorrect Imaginary Number Format
-		static const int DEFAULT_ERROR_CODE = -2;///<Default error code
-		static const int HASHMAP_ERROR_CODE = 1;///<HashMap Error code
-		static const int LinAl_ERROR_CODE = 2;///<LinAl Error Code
-		static const int DARRAY_ERROR_CODE = 3;///<DArray Error Code
-		static const int STRING_TOKENIZER_ERROR_CODE = 4;///<String Tokenizer Error
-		static const int MATRIX_ERROR_CODE = 5;
-		static const int LTREE_ERROR_CODE = 6;///<LinAl Error Code
-		static const int DSTACK_ERROR_CODE = 7;
-		static const int FORMAT_ERROR_CODE = 8;
-		static const int ARRAYLIST_ERROR_CODE = 9;
-		static const int ALPARS_ERROR_CODE = 10;///<LinAl Error Code
-		static const int DHashMap_ERROR_CODE = 11;
-		static const int INVALID_ARGUMENT_ERROR_CODE = 12;
-		static const int IO_ERROR_CODE = 13;///< Input and/or Output error
-		static const int PLANE_OUT_OF_BOUNDS_ERROR_CODE = 14;///<Plane Out of Bounds element requested
-		static const int DLIST_ERROR_CODE = 15;///<Invalid DList Request
 		
 		/**
 		 * Gets the error message.
 		 * @return DString Error message.
 		 */
-		DString getMessage() const;
+    std::string getMessage() const{return what();}
 
 		/** 
 		 * Gets the Error type.
 		 * @return DString Error type
 		 */
-		DString getType() const{return errorType;}
+    std::string getType() const{return what();}
 
 		/**
 		 * Gets the Cause of the Error.
 		 * @return DString Error Cause
 		 */
-		DString getCause() const{return cause;}
+    std::string getCause() const{return what();}
 
 		/**
 		 * Gets the Error code(int).
@@ -109,19 +73,16 @@ class DavidException
 		 * Sends the result of getMessage() to Standard Output.
 		 * @see getMessage()
 		 */
-		void stdOut(){DString bean = getMessage(); std::cout << bean << std::endl;}
+		void stdOut(){std::cout << what() << std::endl;}
 
 		/**
 		 * Sends the result of getMessage() to Standard Error.
 		 * @see getMessage()
 		 */
-		void stdErr(){DString bean = getMessage(); std::cerr << bean << std::endl;}
+		void stdErr(){std::cerr << what() << std::endl;}
 
 	private:
-		DString cause;
-		DString errorType;
 		int errorCode;
-}
-;
+};
 
 #endif

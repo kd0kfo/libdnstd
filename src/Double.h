@@ -10,6 +10,7 @@
 #endif
 
 #include "DavidException.h"
+#include "DString.h"
 
 #ifdef __DEBUG__
 #define DEBUG_PRINT(x) std::cout << x << std::endl; 

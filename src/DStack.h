@@ -3,6 +3,7 @@
 
 #include <fstream>
 
+#include "DString.h"
 #include "DavidException.h"
 
 /**

@@ -2,6 +2,7 @@
 #define DTREE_CPP
 
 #include "DArray.h"
+#include "DString.h"
 
 /**
  * Binary Tree used with LinAl

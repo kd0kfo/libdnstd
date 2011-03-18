@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "DString.h"
 #include "DavidException.h"
 
 /**
