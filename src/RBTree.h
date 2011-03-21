@@ -1,53 +1,36 @@
 #ifndef RBTREE_H
 #define RBTREE_H 1
 
-template class<typename value_t > {
-  public:
+namespace utils{
 typedef enum {RBT_BLACK = 0,RBT_RED}RBTree_Color;
+template <typename value_t>
+class RBTree {
+  public:
+  RBTree():left(0),right(0),parent(0){}
+    RBTree(const value_t& val) : left(0),right(0),parent(0),data(val){}
  typedef value_t value_type;
 
-  RBTree();
-  RBTree(value_type data);
-
-  RBTree* root()const;
-  RBTree* begin()const;
-  RBTree* end()const;{return NULL;}
-  RBTree* insert(RBTree *x);
-  RBTree* find(const value_type key);
-  RBTree* remove(RBTree *node);
-  size_t size()const;
-  
-  value_type data;
-  RBTree *left,*right,*parent;
-
- private:
-  static short RBTDirection(const RBTree *lhs, value_type rhs);
-  static RBTree* RightRotate(RBTree *tree);
-  static RBTree* LeftRotate(RBTree *tree);
-  static void insertBST(RBTree *rootnode, RBTree *x);
-  static RBTree* RBTSuccessor(RBTree *node);
-  static int RBTIsBlack(RBTree *node);
-  static void CleanRBT(RBTree *root, RBTree *node);
-
+	RBTree_Color color;//red or black.
+	value_type data;
+	RBTree<value_t> *left,*right,*parent;
 };
+}
 
-template<typename value_t> 
-RBTree<value_t>*  InitRBTree(RBTree<value_t> *node,value_t data)
+template <typename value_t>
+utils::RBTree<value_t>*  InitRBTree(utils::RBTree<value_t> *node,value_t data)
 {
 	if(node == NULL)
-		node = (RBTree<value_t>*)malloc(sizeof(RBTree<value_t>));
-	node->key = key;
+	  node = (utils::RBTree<value_t>*)malloc(sizeof(utils::RBTree<value_t>));
 	node->data = data;
 	node->left = node->parent = node->right = NULL;
-	node->color = RBT_BLACK;
-	
+	node->color = utils::RBT_BLACK;
 	return node;
 }
 
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::RightRotate(RBTree<value_t> *tree)
+template <typename value_t>
+utils::RBTree<value_t>* RightRotate(utils::RBTree<value_t> *tree)
 {
-	RBTree<value_t> *left, *right;
+	utils::RBTree<value_t> *left, *right;
 	if(tree == NULL)
 		return NULL;;
 	if(tree->left == NULL)
@@ -75,10 +58,11 @@ RBTree<value_t>* RBTree<value_t>::RightRotate(RBTree<value_t> *tree)
 	return left;
 }
 
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::LeftRotate(RBTree<value_t> *tree)
+
+template <typename value_t>
+ utils::RBTree<value_t>* LeftRotate(utils::RBTree<value_t> *tree)
 {
-	RBTree<value_t> *left, *right;
+	utils::RBTree<value_t> *left, *right;
 	if(tree == NULL)
 		return NULL;
 	if(tree->right == NULL)
@@ -106,18 +90,19 @@ RBTree<value_t>* RBTree<value_t>::LeftRotate(RBTree<value_t> *tree)
 	return right;
 }
 
-template<typename value_t>
-short RBTree<value_t>::RBTDirection(const RBTree<value_t> *lhs, RBTree_key_t rhs)
+
+template <typename value_t>
+short RBTDirection(const utils::RBTree<value_t> *lhs, value_t rhs)
 {
-	if(lhs->key > rhs)
+	if(lhs->data > rhs)
 		return -1;
-	if(lhs->key < rhs)
+	if(lhs->data < rhs)
 		return 1;
 	return 0;
 }
 
-template<typename value_t> 
-void RBTree<value_t>::insertBST(RBTree<value_t> * rootnode, RBTree<value_t> *x)
+template <typename value_t>
+void insertBST(utils::RBTree<value_t> *rootnode,utils::RBTree<value_t> *x)
 {
 	int direction;
 	if(rootnode == NULL)
@@ -127,7 +112,7 @@ void RBTree<value_t>::insertBST(RBTree<value_t> * rootnode, RBTree<value_t> *x)
 		return;
 	}
 
-	direction = RBTDirection(rootnode,x->key);
+	direction = RBTDirection(rootnode,x->data);
 	if(direction < 0)//goes to the left
 	{
 		if(rootnode->left == NULL)
@@ -156,27 +141,29 @@ void RBTree<value_t>::insertBST(RBTree<value_t> * rootnode, RBTree<value_t> *x)
  *
  * Returns: new root node
  */
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::insert(RBTree<value_t> *x)
+template <typename value_t>
+utils::RBTree<value_t>* insertRBT(utils::RBTree<value_t> **ptrRoot,utils::RBTree<value_t> *x)
 {
+  using utils::RBTree;
 	int direction;
-	RBTree<value_t>* root;
-	insertBST(this,x);
-	if(this == x)
+	RBTree<value_t> *root = *ptrRoot;
+	insertBST(root,x);
+	if(root == NULL || root == x)
 	{
+		x->color = utils::RBT_BLACK;
+		*ptrRoot = x;
 		return x;
 	}
-	root = this;
-	x->color = RBT_RED;
-	while(x != root && x->parent->color == RBT_RED)
+	x->color = utils::RBT_RED;
+	while(x != root && x->parent->color == utils::RBT_RED)
 	{
 		if(x->parent == x->parent->parent->left)
 		{
-			RBTree *uncle = x->parent->parent->right;
-			if(uncle != NULL && uncle->color == RBT_RED)
+			RBTree<value_t> *uncle = x->parent->parent->right;
+			if(uncle != NULL && uncle->color == utils::RBT_RED)
 			{
-				x->parent->color = uncle->color = RBT_BLACK;
-				x->parent->parent->color = RBT_RED;
+				x->parent->color = uncle->color = utils::RBT_BLACK;
+				x->parent->parent->color = utils::RBT_RED;
 				x = x->parent->parent;
 			}
 			else
@@ -186,18 +173,18 @@ RBTree<value_t>* RBTree<value_t>::insert(RBTree<value_t> *x)
 					x = x->parent;
 					LeftRotate(x);
 				}
-				x->parent->color = RBT_BLACK;
-				x->parent->parent->color = RBT_RED;
+				x->parent->color = utils::RBT_BLACK;
+				x->parent->parent->color = utils::RBT_RED;
 				RightRotate(x->parent->parent);
 			}
 		}
 		else
 		{
 			RBTree<value_t> *uncle = x->parent->parent->left;
-			if(uncle != NULL && uncle->color == RBT_RED)
+			if(uncle != NULL && uncle->color == utils::RBT_RED)
 			{
-				x->parent->color = uncle->color = RBT_BLACK;
-				x->parent->parent->color = RBT_RED;
+				x->parent->color = uncle->color = utils::RBT_BLACK;
+				x->parent->parent->color = utils::RBT_RED;
 				x = x->parent->parent;
 			}
 			else
@@ -207,8 +194,8 @@ RBTree<value_t>* RBTree<value_t>::insert(RBTree<value_t> *x)
 					x = x->parent;
 					RightRotate(x);
 				}
-				x->parent->color = RBT_BLACK;
-				x->parent->parent->color = RBT_RED;
+				x->parent->color = utils::RBT_BLACK;
+				x->parent->parent->color = utils::RBT_RED;
 				LeftRotate(x->parent->parent);
 			}
 		}
@@ -217,13 +204,13 @@ RBTree<value_t>* RBTree<value_t>::insert(RBTree<value_t> *x)
 	//Make sure the real root of the tree is black
 	while(root->parent != NULL)
 		root = root->parent;
-	root->color = RBT_BLACK;
+	root->color = utils::RBT_BLACK;
 	*ptrRoot = root;
 	return root;
 }
 
-template<typename value_t> 
-RBTree<value_t>* find(const value_t& key)
+template <typename value_t>
+utils::RBTree<value_t>* FindRBTNode(utils::RBTree<value_t> *tree, value_t key)
 {
 	short direction;
 	if(tree == NULL)
@@ -233,15 +220,15 @@ RBTree<value_t>* find(const value_t& key)
 	if(direction == 0)
 		return tree;
 	if(direction > 0)
-		return find(tree->right,key);
+		return FindRBTNode(tree->right,key);
 
-	return find(tree->left,key);
+	return FindRBTNode(tree->left,key);
 }
 
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::RBTSuccessor(RBTree<value_t> *node)
+template <typename value_t>
+utils::RBTree<value_t>* RBTSuccessor(utils::RBTree<value_t> *node)
 {
-	RBTree<value_t> *temp;
+	utils::RBTree<value_t> *temp;
 	if(node == NULL)
 		return NULL;
 	temp = node->right;
@@ -272,88 +259,88 @@ RBTree<value_t>* RBTree<value_t>::RBTSuccessor(RBTree<value_t> *node)
 	return temp;
 }
 
-template<typename value_t>
-int RBTree<value_t>::RBTIsBlack(RBTree<value_t> *node)
+template <typename value_t>
+int RBTIsBlack(utils::RBTree<value_t> *node)
 {
-	return node == NULL || node->color == RBT_BLACK;
+	return node == NULL || node->color == utils::RBT_BLACK;
 }
 
-template<typename value_t>
-void RBTree<value_t>::CleanRBT(RBTree<value_t> *root, RBTree<value_t> *node)
+template <typename value_t>
+void CleanRBT(utils::RBTree<value_t> *root, utils::RBTree<value_t> *node)
 {
 	if(node == NULL || root == NULL)
 		return;
 
-	while(node->color == RBT_BLACK && node != root)
+	while(node->color == utils::RBT_BLACK && node != root)
 	{
 		if(node == node->parent->left)
 		{
-			RBTree *sibling = node->parent->right;
-			if(sibling->color == RBT_RED)
+		  utils::RBTree<value_t> *sibling = node->parent->right;
+			if(sibling->color == utils::RBT_RED)
 			{
-				sibling->color = RBT_BLACK;
-				node->parent->color = RBT_RED;
+				sibling->color = utils::RBT_BLACK;
+				node->parent->color = utils::RBT_RED;
 				LeftRotate(node->parent);
 				sibling = node->parent->right;
 			}
 			if(RBTIsBlack(sibling->right) && RBTIsBlack(sibling->left))
 			{
-				sibling->color = RBT_RED;
+				sibling->color = utils::RBT_RED;
 				node = node->parent;
 			}
 			else
 			{
 				if(RBTIsBlack(sibling->right))
 				{
-					sibling->left->color = RBT_BLACK;
-					sibling->color = RBT_RED;
+					sibling->left->color = utils::RBT_BLACK;
+					sibling->color = utils::RBT_RED;
 					RightRotate(sibling);
 					sibling = node->parent->right;
 				}
 				sibling->color = node->parent->color;
-				node->parent->color = sibling->right->color = RBT_BLACK;
+				node->parent->color = sibling->right->color = utils::RBT_BLACK;
 				LeftRotate(node->parent);
 				node = root;
 			}
 		}
 		else
 		{
-			RBTree *sibling = node->parent->left;
-			if(sibling->color == RBT_RED)
+			utils::RBTree<value_t> *sibling = node->parent->left;
+			if(sibling->color == utils::RBT_RED)
 			{
-				sibling->color = RBT_BLACK;
-				node->parent->color = RBT_RED;
+				sibling->color = utils::RBT_BLACK;
+				node->parent->color = utils::RBT_RED;
 				RightRotate(node->parent);
 				sibling = node->parent->left;
 			}
 			if(RBTIsBlack(sibling->right) && RBTIsBlack(sibling->left))
 			{
-				sibling->color = RBT_RED;
+				sibling->color = utils::RBT_RED;
 				node = node->parent;
 			}
 			else
 			{
 				if(RBTIsBlack(sibling->left))
 				{
-					sibling->right->color = RBT_BLACK;
-					sibling->color = RBT_RED;
+					sibling->right->color = utils::RBT_BLACK;
+					sibling->color = utils::RBT_RED;
 					LeftRotate(sibling);
 					sibling = node->parent->left;
 				}
 				sibling->color = node->parent->color;
-				node->parent->color = sibling->left->color = RBT_BLACK;
+				node->parent->color = sibling->left->color = utils::RBT_BLACK;
 				RightRotate(node->parent);
 				node = root;
 			}
 		}
 	}
-	node->color = RBT_BLACK;
+	node->color = utils::RBT_BLACK;
 	if(root->parent != 0)
 	{
 		root = node;
 		while(root->parent != 0)
 			root = root->parent;
-		root->color = RBT_BLACK;
+		root->color = utils::RBT_BLACK;
 	}
 
 }
@@ -363,13 +350,16 @@ void RBTree<value_t>::CleanRBT(RBTree<value_t> *root, RBTree<value_t> *node)
  * then returned, so that it can be freed from
  * memory or used in some other manner.
  */
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::remove(RBTree<value_t> *node)
+template <typename value_t>
+utils::RBTree<value_t>* removeRBT(utils::RBTree<value_t> **tree, utils::RBTree<value_t> *node)
 {
-	RBTree<value_t> *x,*y, *sentinal = 0, *root = *tree;
+	utils::RBTree<value_t> *x,*y, *sentinal = 0, *root = *tree;
 
-	if(this == node && node->left == NULL && node->right == NULL)//Is this node the only node in the tree.
+	if(*tree == node && node->left == NULL && node->right == NULL)//Is this node the only node in the tree.
+	{
+		*tree = NULL;
 		return node;
+	}
 
 	if(node->left == NULL || node->right == NULL)
 		y = node;
@@ -384,9 +374,9 @@ RBTree<value_t>* RBTree<value_t>::remove(RBTree<value_t> *node)
 
 	if(x == NULL)
 	{
-		sentinal = (RBTree*)malloc(sizeof(RBTree));
+	  sentinal = (utils::RBTree<value_t>*)malloc(sizeof(utils::RBTree<value_t>));
 		sentinal->left = sentinal->right = NULL;
-		sentinal->color = RBT_BLACK;
+		sentinal->color = utils::RBT_BLACK;
 		x = sentinal;
 	}
 	x->parent = y->parent;
@@ -404,7 +394,7 @@ RBTree<value_t>* RBTree<value_t>::remove(RBTree<value_t> *node)
 	}
 	if(y != node)
 	{
-		if(y->color == RBT_BLACK)
+		if(y->color == utils::RBT_BLACK)
 			CleanRBT(root,x);
 		y->left = node->left;
 		y->right = node->right;
@@ -423,7 +413,7 @@ RBTree<value_t>* RBTree<value_t>::remove(RBTree<value_t> *node)
 		}
 	}
 	else
-		if(y->color == RBT_BLACK)
+		if(y->color == utils::RBT_BLACK)
 			CleanRBT(root,x);
 
 	//Ensure tree still holds the root node address.
@@ -448,47 +438,29 @@ RBTree<value_t>* RBTree<value_t>::remove(RBTree<value_t> *node)
 }
 
 
-template<typename value_t> 
-size_t RBTree<value_t>::size()const
+template <typename value_t>
+int CountNodes(const utils::RBTree<value_t> *tree)
 {
-  size_t returnMe = 1;
-  if(tree->left)
-    returnMe += tree->left.size();
-  if(tree->right)
-    returnMe += tree->right.size();
-  return returnMe;
+	if(tree == NULL)
+		return 0;
+
+	return 1 + CountNodes(tree->left) + CountNodes(tree->right);
 }
 
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::begin()
+template <typename value_t>
+utils::RBTree<value_t>* FirstRBTNode(utils::RBTree<value_t>* tree)
 {
-	if(this->left == NULL)
-		return this;
-	return this->left.begin();
+	if(tree == NULL || tree->left == NULL)
+		return tree;
+	return FirstRBTNode(tree->left);
 }
 
-template<typename value_t> 
-RBTree<value_t>* RBTree<value_t>::root()
+template <typename value_t>
+utils::RBTree<value_t>* LastRBTNode(utils::RBTree<value_t> *tree)
 {
-  RBTree<value_t> *root = this;
-  while(root->parent != NULL)
-    root = root->parent;
-  return root;
+	if(tree == NULL || tree->right == NULL)
+		return tree;
+	return FirstRBTNode(tree->right);
 }
-
-template<typename value_t> 
-RBTree<value_t>::RBTree()
-{
-  value_type temp;
-  InitRBTree(this,temp);
-}
-
-template<typename value_t> 
-RBTree<value_t>::RBTree(value_t data)
-{
-  InitRBTree(this,data);
-}
-
-
 
 #endif
