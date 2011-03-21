@@ -90,7 +90,7 @@ DIST_SOURCES = $(am__libdnstd_a_SOURCES_DIST)
 am__libdnstd_a_include_HEADERS_DIST = DNode.h DList.h DTree.h Binary.h \
 	Character.h Complex.h DArray.h DavidException.h DHashMap.h \
 	Double.h DRandom.h DStack.h DString.h StringTokenizer.h \
-	NumericalIntegration.h MersenneTwister.h fft.h
+	NumericalIntegration.h MersenneTwister.h RBTree.h fft.h
 libdnstd_a_includeHEADERS_INSTALL = $(INSTALL_HEADER)
 HEADERS = $(libdnstd_a_include_HEADERS)
 ETAGS = etags
@@ -189,7 +189,8 @@ libdnstd_a_includedir = $(includedir)/libdnstd
 libdnstd_a_include_HEADERS = DNode.h DList.h DTree.h Binary.h \
 	Character.h Complex.h DArray.h DavidException.h DHashMap.h \
 	Double.h DRandom.h DStack.h DString.h StringTokenizer.h \
-	NumericalIntegration.h MersenneTwister.h $(am__append_3)
+	NumericalIntegration.h MersenneTwister.h RBTree.h \
+	$(am__append_3)
 all: all-am
 
 .SUFFIXES:
