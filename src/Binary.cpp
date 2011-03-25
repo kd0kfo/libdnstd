@@ -5,97 +5,60 @@ namespace math{
 
 Binary::Binary()
 {
-	i = new int;
-	*i = 0;
-	bString = new DString("0");
+  i = 0;
+	bString = "0";
 	bitSize = 0;
-}
-
-Binary::~Binary()
-{
-	if(i != 0)
-	{
-		delete i;
-		i = 0;
-	}
-	if(bString != 0)
-	{
-		delete bString;
-		bString = 0;
-	}
 }
 
 Binary::Binary(const Binary& B)
 {
-	i = new int;
-	*i = B.getInt();
-	bString = new DString;
-	*bString = B.toDString();
-	bitSize = B.getBitSize();
+  i = B.i;
+  bString = B.bString;
+  bitSize = B.bitSize;
 }
 
-Binary::Binary(const DString& bean)
+  Binary::Binary(const std::string& bean)
 {
-	i = new int;
-	*i = 0;
-	for(int j = 0;j<bean.length();j++)
-	{
-		if(bean[j] != '0' && bean[j] != '1')
-			throw DavidException(DString(bean)+DString(" is an improperly formed Binary."),DavidException::FORMAT_ERROR_CODE);
-		*i += (bean[j] == '1') ? (int)Double::exponent(2,bean.length()-1-j) : 0;
-	}
-	bString = new DString(bean);
-	bitSize = bString->length();
-
+i = 0;
+ for(int j = 0,size=bean.size();j<size;j++)
+   {
+     if(bean[j] != '0' && bean[j] != '1')
+       throw DavidException(bean+" is an improperly formed Binary.",DavidException::FORMAT_ERROR_CODE);
+     i += (bean[j] == '1') ? (Binary::value_type)Double::exponent(2,bean.length()-1-j) : 0;
+   }
+ bString = bean;
+ bitSize = bString.size();
 }
 
 Binary Binary::operator=(const Binary& B)
 {
-	if(i != 0)
-	{
-		delete i;
-		i = 0;
-	}
-	if(bString != 0)
-	{
-		delete bString;
-		bString = 0;
-	}
-	i = new int;
-	bString = new DString;
-	*i = B.getInt();
-	*bString = B.toDString();
-	bitSize = B.getBitSize();
-
+  i = B.i;
+  bString = B.bString;
+  bitSize = B.bitSize;
 	return *this;
 }
 
-Binary::Binary(int newI)
+Binary::Binary(Binary::value_type newI)
 {
-	i = new int;
-	bString = new DString;
-	*i = newI;
-	bitSize = 0;
-	*bString = toBinary(*i).toDString();
-	bitSize = bString->length();
+  i = newI;
+  bString = toBinary(i).str();
+  bitSize = bString.size();
 }
 
-Binary Binary::toBinary(int i)
+Binary Binary::toBinary(Binary::value_type i)
 {
 	Binary b;
 	if(i == 0)
-		return b;
-	if(i < -1)
-	  throw DavidException("Number must be a positive integer","Format Error", DavidException::FORMAT_ERROR_CODE);
-	*(b.i) = i;
-	*(b.bString) = "";
+	  return b;
+	b.i = i;
+	b.bString = "";
 	while(i > 0)
 	{
 		int modI = i % 2;
-		*(b.bString) = (modI) ? DString("1")+b.toDString() : DString("0")+b.toDString();
-		i = i / 2;
+		b.bString = (modI) ? "1"+b.str() :"0"+b.str();
+	i >>= 1;
 	}
-	b.setBitSize(b.bString->length());
+	b.setBitSize(b.bString.size());
 	return b;
 }
 
@@ -103,15 +66,12 @@ bool Binary::operator ==(const Binary& B)
 {
 	if(this == &B)
 		return true;
-	if(*i == *(B.i) && *bString == *(B.bString))
-		return true;
-	else
-		throw "Invalid Binary number";
+	return i == B.i;
 }
 
 Binary Binary::operator +(const Binary& B)
 {
-	Binary sum(*i+B.getInt());
+	Binary sum(i+B.getInt());
 	if(B.getBitSize() > sum.bitSize)
 		sum.setBitSize(B.getBitSize());
 	return sum;
@@ -120,7 +80,7 @@ Binary Binary::operator +(const Binary& B)
 
 Binary Binary::operator -(const Binary& B)
 {
-	Binary diff(*i-*(B.i));
+	Binary diff(i-B.i);
 	if(B.getBitSize() > diff.bitSize)
 		diff.setBitSize(B.getBitSize());
 	return diff;
@@ -128,49 +88,44 @@ Binary Binary::operator -(const Binary& B)
 
 Binary Binary::operator ~()
 {
-	DString bean;
-	for(int j = 0;j<bString->length();j++)
+  std::string bean;
+  size_t size = bString.size();
+	for(size_t j = 0;j<size;j++)
 	{
-		if(bString->charAt(j) == '1')
-		{
-			bean = DString("0")+bean;
-		}
-		else if(bString->charAt(j) == '0')
-		{
-			bean = DString("1")+bean;
-		}
-		else
-		{
-			throw "Invalid Binary Number";
-		}
+	  if(bString[j] == '1')
+	    bean = "0"+bean;
+	  else if(bString[j] == '0')
+	    bean = "1"+bean;
+	  else
+	    throw "Invalid Binary Number";
 	}
-	if(bitSize > bString->length())
+	if(bitSize > size)
 	{
-		for(int j = bString->length();j<bitSize;j++)
-			bean = DString("1")+bean;
+	  for(size_t j = size;j<bitSize;j++)
+	    bean = "1"+bean;
 	}
 	Binary b;
-	for(int j = 0;j<bean.length();j++)
+	for(int j = 0,size= bean.size();j<size;j++)
 	{
-		*(b.i) += (bean[j] == '1') ? (int) Double::exponent(2,j) : 0;
+		b.i += (bean[j] == '1') ? (Binary::value_type) Double::exponent(2,j) : 0;
 	}
-	*(b.bString) = bean;
-	b.setBitSize(this->bitSize);
+	b.bString = bean;
+	b.bitSize = this->bitSize;
  	return b;
 }
 
 Binary Binary::operator ^(const Binary& B)
 {
-	int tempInt = *i & B.getInt();
-	Binary _xor(tempInt);
-	if(B.getBitSize() > _xor.bitSize)
-		_xor.setBitSize(B.getBitSize());
-	return _xor;
+  Binary::value_type tempInt = i & B.i;
+  Binary _xor(tempInt);
+  if(B.bitSize > _xor.bitSize)
+    _xor.bitSize = B.getBitSize();
+  return _xor;
 }
 
 Binary Binary::operator &(const Binary& B)
 {
-	Binary _and(*i & B.getInt());
+	Binary _and(i & B.getInt());
 	if(B.getBitSize() > _and.bitSize)
 		_and.setBitSize(B.getBitSize());
 	return _and;
@@ -178,7 +133,7 @@ Binary Binary::operator &(const Binary& B)
 
 Binary Binary::operator |(const Binary& B)
 {
-	Binary _or(*i | B.getInt());
+	Binary _or(i | B.getInt());
 	if(B.getBitSize() > _or.bitSize)
 		_or.setBitSize(B.getBitSize());
 	return _or;
@@ -191,16 +146,16 @@ Binary Binary::nand(const Binary& B)
 
 Binary Binary::nor(const Binary& B)
 {
-	return ~(Binary(!(*i & B.getInt())));
+	return ~(Binary(!(i & B.i)));
 }
 		
-DString Binary::toDString() const
+std::string Binary::str() const
 {
-	if(bString->length() == bitSize)
-		return *bString;
-	DString bean = *bString;
-	for(int j = bean.length();j<bitSize;j++)
-		bean = DString("0")+bean;
+	if(bString.size() == bitSize)
+		return bString;
+	std::string bean = bString;
+	for(size_t j = bean.size();j<bitSize;j++)
+		bean = "0"+bean;
 	return bean;
 }
 

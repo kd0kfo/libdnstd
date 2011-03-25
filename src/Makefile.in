@@ -62,18 +62,14 @@ AR = ar
 ARFLAGS = cru
 libdnstd_a_AR = $(AR) $(ARFLAGS)
 libdnstd_a_LIBADD =
-am__libdnstd_a_SOURCES_DIST = DNode.cpp DList.cpp DTree.cpp Binary.cpp \
-	Character.cpp Complex.cpp DArray.cpp DavidException.cpp \
-	DHashMap.cpp Double.cpp DRandom.cpp DString.cpp \
-	StringTokenizer.cpp NumericalIntegration.cpp fft.cpp
+am__libdnstd_a_SOURCES_DIST = Binary.cpp Character.cpp Complex.cpp \
+	DavidException.cpp Double.cpp DRandom.cpp StringTokenizer.cpp \
+	NumericalIntegration.cpp fft.cpp
 @BUILD_WITH_FFTW3_TRUE@am__objects_1 = libdnstd_a-fft.$(OBJEXT)
-am_libdnstd_a_OBJECTS = libdnstd_a-DNode.$(OBJEXT) \
-	libdnstd_a-DList.$(OBJEXT) libdnstd_a-DTree.$(OBJEXT) \
-	libdnstd_a-Binary.$(OBJEXT) libdnstd_a-Character.$(OBJEXT) \
-	libdnstd_a-Complex.$(OBJEXT) libdnstd_a-DArray.$(OBJEXT) \
+am_libdnstd_a_OBJECTS = libdnstd_a-Binary.$(OBJEXT) \
+	libdnstd_a-Character.$(OBJEXT) libdnstd_a-Complex.$(OBJEXT) \
 	libdnstd_a-DavidException.$(OBJEXT) \
-	libdnstd_a-DHashMap.$(OBJEXT) libdnstd_a-Double.$(OBJEXT) \
-	libdnstd_a-DRandom.$(OBJEXT) libdnstd_a-DString.$(OBJEXT) \
+	libdnstd_a-Double.$(OBJEXT) libdnstd_a-DRandom.$(OBJEXT) \
 	libdnstd_a-StringTokenizer.$(OBJEXT) \
 	libdnstd_a-NumericalIntegration.$(OBJEXT) $(am__objects_1)
 libdnstd_a_OBJECTS = $(am_libdnstd_a_OBJECTS)
@@ -87,9 +83,8 @@ CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 SOURCES = $(libdnstd_a_SOURCES)
 DIST_SOURCES = $(am__libdnstd_a_SOURCES_DIST)
-am__libdnstd_a_include_HEADERS_DIST = DNode.h DList.h DTree.h Binary.h \
-	Character.h Complex.h DArray.h DavidException.h DHashMap.h \
-	Double.h DRandom.h DStack.h DString.h StringTokenizer.h \
+am__libdnstd_a_include_HEADERS_DIST = Binary.h Character.h Complex.h \
+	DavidException.h Double.h DRandom.h StringTokenizer.h \
 	NumericalIntegration.h MersenneTwister.h RBTree.h fft.h
 libdnstd_a_includeHEADERS_INSTALL = $(INSTALL_HEADER)
 HEADERS = $(libdnstd_a_include_HEADERS)
@@ -180,15 +175,13 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 lib_LIBRARIES = libdnstd.a
 libdnstd_adir = $(libdir)
-libdnstd_a_SOURCES = DNode.cpp DList.cpp DTree.cpp Binary.cpp \
-	Character.cpp Complex.cpp DArray.cpp DavidException.cpp \
-	DHashMap.cpp Double.cpp DRandom.cpp DString.cpp \
-	StringTokenizer.cpp NumericalIntegration.cpp $(am__append_1)
+libdnstd_a_SOURCES = Binary.cpp Character.cpp Complex.cpp \
+	DavidException.cpp Double.cpp DRandom.cpp StringTokenizer.cpp \
+	NumericalIntegration.cpp $(am__append_1)
 libdnstd_a_CPPFLAGS = -Wall $(am__append_2)
 libdnstd_a_includedir = $(includedir)/libdnstd
-libdnstd_a_include_HEADERS = DNode.h DList.h DTree.h Binary.h \
-	Character.h Complex.h DArray.h DavidException.h DHashMap.h \
-	Double.h DRandom.h DStack.h DString.h StringTokenizer.h \
+libdnstd_a_include_HEADERS = Binary.h Character.h Complex.h \
+	DavidException.h Double.h DRandom.h StringTokenizer.h \
 	NumericalIntegration.h MersenneTwister.h RBTree.h \
 	$(am__append_3)
 all: all-am
@@ -267,13 +260,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Binary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Character.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Complex.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DArray.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DHashMap.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DList.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DNode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DRandom.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DString.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DTree.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DavidException.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Double.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-NumericalIntegration.Po@am__quote@
@@ -293,48 +280,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-libdnstd_a-DNode.o: DNode.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DNode.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DNode.Tpo" -c -o libdnstd_a-DNode.o `test -f 'DNode.cpp' || echo '$(srcdir)/'`DNode.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DNode.Tpo" "$(DEPDIR)/libdnstd_a-DNode.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DNode.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DNode.cpp' object='libdnstd_a-DNode.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DNode.o `test -f 'DNode.cpp' || echo '$(srcdir)/'`DNode.cpp
-
-libdnstd_a-DNode.obj: DNode.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DNode.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DNode.Tpo" -c -o libdnstd_a-DNode.obj `if test -f 'DNode.cpp'; then $(CYGPATH_W) 'DNode.cpp'; else $(CYGPATH_W) '$(srcdir)/DNode.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DNode.Tpo" "$(DEPDIR)/libdnstd_a-DNode.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DNode.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DNode.cpp' object='libdnstd_a-DNode.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DNode.obj `if test -f 'DNode.cpp'; then $(CYGPATH_W) 'DNode.cpp'; else $(CYGPATH_W) '$(srcdir)/DNode.cpp'; fi`
-
-libdnstd_a-DList.o: DList.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DList.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DList.Tpo" -c -o libdnstd_a-DList.o `test -f 'DList.cpp' || echo '$(srcdir)/'`DList.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DList.Tpo" "$(DEPDIR)/libdnstd_a-DList.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DList.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DList.cpp' object='libdnstd_a-DList.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DList.o `test -f 'DList.cpp' || echo '$(srcdir)/'`DList.cpp
-
-libdnstd_a-DList.obj: DList.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DList.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DList.Tpo" -c -o libdnstd_a-DList.obj `if test -f 'DList.cpp'; then $(CYGPATH_W) 'DList.cpp'; else $(CYGPATH_W) '$(srcdir)/DList.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DList.Tpo" "$(DEPDIR)/libdnstd_a-DList.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DList.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DList.cpp' object='libdnstd_a-DList.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DList.obj `if test -f 'DList.cpp'; then $(CYGPATH_W) 'DList.cpp'; else $(CYGPATH_W) '$(srcdir)/DList.cpp'; fi`
-
-libdnstd_a-DTree.o: DTree.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DTree.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DTree.Tpo" -c -o libdnstd_a-DTree.o `test -f 'DTree.cpp' || echo '$(srcdir)/'`DTree.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DTree.Tpo" "$(DEPDIR)/libdnstd_a-DTree.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DTree.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DTree.cpp' object='libdnstd_a-DTree.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DTree.o `test -f 'DTree.cpp' || echo '$(srcdir)/'`DTree.cpp
-
-libdnstd_a-DTree.obj: DTree.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DTree.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DTree.Tpo" -c -o libdnstd_a-DTree.obj `if test -f 'DTree.cpp'; then $(CYGPATH_W) 'DTree.cpp'; else $(CYGPATH_W) '$(srcdir)/DTree.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DTree.Tpo" "$(DEPDIR)/libdnstd_a-DTree.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DTree.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DTree.cpp' object='libdnstd_a-DTree.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DTree.obj `if test -f 'DTree.cpp'; then $(CYGPATH_W) 'DTree.cpp'; else $(CYGPATH_W) '$(srcdir)/DTree.cpp'; fi`
 
 libdnstd_a-Binary.o: Binary.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Binary.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-Binary.Tpo" -c -o libdnstd_a-Binary.o `test -f 'Binary.cpp' || echo '$(srcdir)/'`Binary.cpp; \
@@ -378,20 +323,6 @@ libdnstd_a-Complex.obj: Complex.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-Complex.obj `if test -f 'Complex.cpp'; then $(CYGPATH_W) 'Complex.cpp'; else $(CYGPATH_W) '$(srcdir)/Complex.cpp'; fi`
 
-libdnstd_a-DArray.o: DArray.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DArray.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DArray.Tpo" -c -o libdnstd_a-DArray.o `test -f 'DArray.cpp' || echo '$(srcdir)/'`DArray.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DArray.Tpo" "$(DEPDIR)/libdnstd_a-DArray.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DArray.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DArray.cpp' object='libdnstd_a-DArray.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DArray.o `test -f 'DArray.cpp' || echo '$(srcdir)/'`DArray.cpp
-
-libdnstd_a-DArray.obj: DArray.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DArray.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DArray.Tpo" -c -o libdnstd_a-DArray.obj `if test -f 'DArray.cpp'; then $(CYGPATH_W) 'DArray.cpp'; else $(CYGPATH_W) '$(srcdir)/DArray.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DArray.Tpo" "$(DEPDIR)/libdnstd_a-DArray.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DArray.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DArray.cpp' object='libdnstd_a-DArray.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DArray.obj `if test -f 'DArray.cpp'; then $(CYGPATH_W) 'DArray.cpp'; else $(CYGPATH_W) '$(srcdir)/DArray.cpp'; fi`
-
 libdnstd_a-DavidException.o: DavidException.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DavidException.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DavidException.Tpo" -c -o libdnstd_a-DavidException.o `test -f 'DavidException.cpp' || echo '$(srcdir)/'`DavidException.cpp; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DavidException.Tpo" "$(DEPDIR)/libdnstd_a-DavidException.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DavidException.Tpo"; exit 1; fi
@@ -405,20 +336,6 @@ libdnstd_a-DavidException.obj: DavidException.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DavidException.cpp' object='libdnstd_a-DavidException.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DavidException.obj `if test -f 'DavidException.cpp'; then $(CYGPATH_W) 'DavidException.cpp'; else $(CYGPATH_W) '$(srcdir)/DavidException.cpp'; fi`
-
-libdnstd_a-DHashMap.o: DHashMap.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DHashMap.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DHashMap.Tpo" -c -o libdnstd_a-DHashMap.o `test -f 'DHashMap.cpp' || echo '$(srcdir)/'`DHashMap.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DHashMap.Tpo" "$(DEPDIR)/libdnstd_a-DHashMap.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DHashMap.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DHashMap.cpp' object='libdnstd_a-DHashMap.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DHashMap.o `test -f 'DHashMap.cpp' || echo '$(srcdir)/'`DHashMap.cpp
-
-libdnstd_a-DHashMap.obj: DHashMap.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DHashMap.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DHashMap.Tpo" -c -o libdnstd_a-DHashMap.obj `if test -f 'DHashMap.cpp'; then $(CYGPATH_W) 'DHashMap.cpp'; else $(CYGPATH_W) '$(srcdir)/DHashMap.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DHashMap.Tpo" "$(DEPDIR)/libdnstd_a-DHashMap.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DHashMap.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DHashMap.cpp' object='libdnstd_a-DHashMap.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DHashMap.obj `if test -f 'DHashMap.cpp'; then $(CYGPATH_W) 'DHashMap.cpp'; else $(CYGPATH_W) '$(srcdir)/DHashMap.cpp'; fi`
 
 libdnstd_a-Double.o: Double.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Double.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-Double.Tpo" -c -o libdnstd_a-Double.o `test -f 'Double.cpp' || echo '$(srcdir)/'`Double.cpp; \
@@ -447,20 +364,6 @@ libdnstd_a-DRandom.obj: DRandom.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DRandom.cpp' object='libdnstd_a-DRandom.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DRandom.obj `if test -f 'DRandom.cpp'; then $(CYGPATH_W) 'DRandom.cpp'; else $(CYGPATH_W) '$(srcdir)/DRandom.cpp'; fi`
-
-libdnstd_a-DString.o: DString.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DString.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-DString.Tpo" -c -o libdnstd_a-DString.o `test -f 'DString.cpp' || echo '$(srcdir)/'`DString.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DString.Tpo" "$(DEPDIR)/libdnstd_a-DString.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DString.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DString.cpp' object='libdnstd_a-DString.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DString.o `test -f 'DString.cpp' || echo '$(srcdir)/'`DString.cpp
-
-libdnstd_a-DString.obj: DString.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-DString.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-DString.Tpo" -c -o libdnstd_a-DString.obj `if test -f 'DString.cpp'; then $(CYGPATH_W) 'DString.cpp'; else $(CYGPATH_W) '$(srcdir)/DString.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-DString.Tpo" "$(DEPDIR)/libdnstd_a-DString.Po"; else rm -f "$(DEPDIR)/libdnstd_a-DString.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DString.cpp' object='libdnstd_a-DString.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-DString.obj `if test -f 'DString.cpp'; then $(CYGPATH_W) 'DString.cpp'; else $(CYGPATH_W) '$(srcdir)/DString.cpp'; fi`
 
 libdnstd_a-StringTokenizer.o: StringTokenizer.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-StringTokenizer.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-StringTokenizer.Tpo" -c -o libdnstd_a-StringTokenizer.o `test -f 'StringTokenizer.cpp' || echo '$(srcdir)/'`StringTokenizer.cpp; \

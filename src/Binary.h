@@ -1,9 +1,7 @@
 #ifndef BINARY_CPP
 #define BINARY_CPP
 
-#include "DString.h"
 #include "Double.h"
-
 
 namespace math{
 
@@ -14,6 +12,11 @@ namespace math{
    */
   class Binary
   {
+  private:
+    typedef unsigned int value_type;
+    value_type i;
+    size_t bitSize;
+    std::string bString;
   public:
   
     /**
@@ -31,16 +34,16 @@ namespace math{
      * Creates binary number based on a positive integer.
      * This cannot handle negative numbers, for which a DavidException is thrown.
      */
-    Binary(int);
+    Binary(value_type);
     
     /**
      * Creates a binary number from a DString. 
      * If the string contains any character other than
      * a "1" or "0", a DavidException is thrown.
      */
-    Binary(const DString&);
+    Binary(const std::string&);
 
-    ~Binary();
+    virtual ~Binary();
 	
     Binary operator =(const Binary& B);
     Binary operator +(const Binary& B);
@@ -82,23 +85,18 @@ namespace math{
      */
     Binary nor(const Binary& B);
 
-    static Binary toBinary(int);
+    static Binary toBinary(value_type);
     
     /**
-     * Gives the *positive) integer value of the binary number.
+     * Gives the integer value of the binary number.
      */
-    int getInt() const {return *i;}
+    const value_type& getInt() const {return i;}
 
-    DString toDString() const;
-    int mostSigBit(){return this->toDString().length();}
-    int setBitSize(int newSize){int temp = bitSize; bitSize = newSize; return temp;}
-    int getBitSize() const {return bitSize;}
+    std::string str() const;
+    value_type mostSigBit(){return (value_type)ceil(log(this->i)/log(2.0));}
+    void setBitSize(value_type newSize){bitSize = newSize;}
+    size_t getBitSize() const {return bitSize;}
 	
-  private:
-    int * i;
-    DString * bString;
-    int bitSize;
-
   };
 }
 
