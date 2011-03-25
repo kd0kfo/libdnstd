@@ -26,24 +26,19 @@ Complex::Complex(const double Real, const double Imaginary)
     Im = 0;
   }
 
-Complex::~Complex()
-{
-	1;//nothing to do
-}
-
 Complex::Complex()
 {
 	Re = 0;
 	Im = 0;
 }
 
-DString Complex::toDString() const
+std::string Complex::str() const
 {
 	std::ostringstream ss;
-	return toDString(ss);
+	return str(ss);
 }
 
-DString Complex::toDString(std::ostringstream& stream) const
+std::string Complex::str(std::ostringstream& stream) const
 {
 	//Add all stuff to stream and then extract a DString from the stream.
 
@@ -116,13 +111,13 @@ Complex Complex::getConjugate() const
 }
 
 
-Complex Complex::parseDString(const DString & string)
+Complex Complex::parseString(const std::string & string)
 {
   double Re, Im;
   Re = Im = 0;
   int middleOpLoc = -1;
   int iLoc = -1;
-  for(int i = 0;i< string.length();i++)
+  for(int i = 0,size = string.size();i< size;i++)
     {
       if(string[i] == 'i' || string[i] == 'I')
 	iLoc = i;
@@ -140,17 +135,17 @@ Complex Complex::parseDString(const DString & string)
 
   if(middleOpLoc < 0)
     {
-      Im = Double(string.substring(0,iLoc)).doubleValue();
+      Im = Double(string.substr(0,iLoc)).doubleValue();
       return Complex(0.0,Im);
     }
 
   if(string[0] == '-')
-    Re = Double(string.substring(1,middleOpLoc)).doubleValue();
+    Re = Double(string.substr(1,middleOpLoc-1)).doubleValue();
   else
-    Re = Double(string.substring(0,middleOpLoc)).doubleValue();
+    Re = Double(string.substr(0,middleOpLoc)).doubleValue();
 
-  DString imaginaryPart = string.substring(middleOpLoc+1,iLoc);
-  if(imaginaryPart.equals(""))
+  std::string imaginaryPart = string.substr(middleOpLoc+1,iLoc-middleOpLoc-1);
+  if(imaginaryPart.size() == 0)
 	  Im = 1;
   else
 	Im = Double(imaginaryPart).doubleValue();
@@ -167,7 +162,7 @@ Complex Complex::parseDString(const DString & string)
  std::ostream& operator<<(std::ostream& theStream, const Complex& cNumber)
 {
 
-  theStream << cNumber.toDString().getString();
+  theStream << cNumber.str();
 	return theStream;
 
 }

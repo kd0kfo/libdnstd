@@ -62,12 +62,12 @@ AR = ar
 ARFLAGS = cru
 libdnstd_a_AR = $(AR) $(ARFLAGS)
 libdnstd_a_LIBADD =
-am__libdnstd_a_SOURCES_DIST = Binary.cpp Character.cpp Complex.cpp \
+am__libdnstd_a_SOURCES_DIST = Binary.cpp Complex.cpp \
 	DavidException.cpp Double.cpp DRandom.cpp StringTokenizer.cpp \
 	NumericalIntegration.cpp fft.cpp
 @BUILD_WITH_FFTW3_TRUE@am__objects_1 = libdnstd_a-fft.$(OBJEXT)
 am_libdnstd_a_OBJECTS = libdnstd_a-Binary.$(OBJEXT) \
-	libdnstd_a-Character.$(OBJEXT) libdnstd_a-Complex.$(OBJEXT) \
+	libdnstd_a-Complex.$(OBJEXT) \
 	libdnstd_a-DavidException.$(OBJEXT) \
 	libdnstd_a-Double.$(OBJEXT) libdnstd_a-DRandom.$(OBJEXT) \
 	libdnstd_a-StringTokenizer.$(OBJEXT) \
@@ -83,7 +83,7 @@ CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 SOURCES = $(libdnstd_a_SOURCES)
 DIST_SOURCES = $(am__libdnstd_a_SOURCES_DIST)
-am__libdnstd_a_include_HEADERS_DIST = Binary.h Character.h Complex.h \
+am__libdnstd_a_include_HEADERS_DIST = Binary.h Complex.h \
 	DavidException.h Double.h DRandom.h StringTokenizer.h \
 	NumericalIntegration.h MersenneTwister.h RBTree.h fft.h
 libdnstd_a_includeHEADERS_INSTALL = $(INSTALL_HEADER)
@@ -175,15 +175,14 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 lib_LIBRARIES = libdnstd.a
 libdnstd_adir = $(libdir)
-libdnstd_a_SOURCES = Binary.cpp Character.cpp Complex.cpp \
-	DavidException.cpp Double.cpp DRandom.cpp StringTokenizer.cpp \
+libdnstd_a_SOURCES = Binary.cpp Complex.cpp DavidException.cpp \
+	Double.cpp DRandom.cpp StringTokenizer.cpp \
 	NumericalIntegration.cpp $(am__append_1)
 libdnstd_a_CPPFLAGS = -Wall $(am__append_2)
 libdnstd_a_includedir = $(includedir)/libdnstd
-libdnstd_a_include_HEADERS = Binary.h Character.h Complex.h \
-	DavidException.h Double.h DRandom.h StringTokenizer.h \
-	NumericalIntegration.h MersenneTwister.h RBTree.h \
-	$(am__append_3)
+libdnstd_a_include_HEADERS = Binary.h Complex.h DavidException.h \
+	Double.h DRandom.h StringTokenizer.h NumericalIntegration.h \
+	MersenneTwister.h RBTree.h $(am__append_3)
 all: all-am
 
 .SUFFIXES:
@@ -258,7 +257,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Binary.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Character.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Complex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DRandom.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-DavidException.Po@am__quote@
@@ -294,20 +292,6 @@ libdnstd_a-Binary.obj: Binary.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Binary.cpp' object='libdnstd_a-Binary.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-Binary.obj `if test -f 'Binary.cpp'; then $(CYGPATH_W) 'Binary.cpp'; else $(CYGPATH_W) '$(srcdir)/Binary.cpp'; fi`
-
-libdnstd_a-Character.o: Character.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Character.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-Character.Tpo" -c -o libdnstd_a-Character.o `test -f 'Character.cpp' || echo '$(srcdir)/'`Character.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-Character.Tpo" "$(DEPDIR)/libdnstd_a-Character.Po"; else rm -f "$(DEPDIR)/libdnstd_a-Character.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Character.cpp' object='libdnstd_a-Character.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-Character.o `test -f 'Character.cpp' || echo '$(srcdir)/'`Character.cpp
-
-libdnstd_a-Character.obj: Character.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Character.obj -MD -MP -MF "$(DEPDIR)/libdnstd_a-Character.Tpo" -c -o libdnstd_a-Character.obj `if test -f 'Character.cpp'; then $(CYGPATH_W) 'Character.cpp'; else $(CYGPATH_W) '$(srcdir)/Character.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdnstd_a-Character.Tpo" "$(DEPDIR)/libdnstd_a-Character.Po"; else rm -f "$(DEPDIR)/libdnstd_a-Character.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Character.cpp' object='libdnstd_a-Character.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-Character.obj `if test -f 'Character.cpp'; then $(CYGPATH_W) 'Character.cpp'; else $(CYGPATH_W) '$(srcdir)/Character.cpp'; fi`
 
 libdnstd_a-Complex.o: Complex.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Complex.o -MD -MP -MF "$(DEPDIR)/libdnstd_a-Complex.Tpo" -c -o libdnstd_a-Complex.o `test -f 'Complex.cpp' || echo '$(srcdir)/'`Complex.cpp; \

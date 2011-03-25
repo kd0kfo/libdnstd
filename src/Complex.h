@@ -3,19 +3,7 @@
 
 #include <sstream>
 
-#ifndef DSTRING_CPP
-#include "DString.h"
-#endif
-
-#ifndef DOUBLE_CPP
 #include "Double.h"
-#endif
-
-#ifdef __DEBUG__ 
-#define DEBUG_PRINT(x) std::cout << x << std::endl; 
-#else 
-#define DEBUG_PRINT
-#endif
 
 namespace math
 {
@@ -39,9 +27,8 @@ public:
 
 	/**
 	 * Destructor.
-	 * Takes care of memory.
 	 */	
-	~Complex();
+	virtual ~Complex(){}
 	
 	/**
 	 * Default Constructor.
@@ -73,9 +60,9 @@ public:
 	 * Produces a DString from the Complex number.
 	 * @return Complex number as a DString
 	 */
-	DString toDString() const;
+	std::string str() const;
 
-	DString toDString(std::ostringstream&) const;
+	std::string str(std::ostringstream&) const;
 
 	Complex & operator=(const Complex&);
 	Complex & operator=(const Double&);
@@ -90,7 +77,9 @@ public:
 	void operator*=(const Complex&);
 
 	double getRealPart() const{return Re;}
+	double real()const{return Re;}
 	double getImaginaryPart() const{return Im;}
+	double imag()const{return Im;}
 
 	/**
 	 * Gives the Complex Conjugate.
@@ -106,7 +95,7 @@ public:
 	 * @return A Complex Number.
 	 * @throws DavidException If the string is not a number, an exception is thrown
 	 */
-	static Complex parseDString(const DString & bean);
+	static Complex parseString(const std::string & bean);
 	friend std::ostream& operator<<(std::ostream&, const Complex&);
 	bool operator>(const Complex&) const;
 	bool operator<(const Complex&) const;
@@ -154,8 +143,6 @@ public:
 private:
 	double Re;
 	double Im;
-
-
 
 };
 

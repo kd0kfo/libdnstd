@@ -360,8 +360,8 @@ class Double
 /**
  * Constants
  */
-const double D_PI = 4*atan(1.0);
-const double D_E = exp(1.0);
+static const double D_PI = 3.14159265358979;
+static const double D_E =  2.71828182845905;
 
 
 #endif
