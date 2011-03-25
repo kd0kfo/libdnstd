@@ -10,7 +10,6 @@
 #endif
 
 #include "DavidException.h"
-#include "DString.h"
 
 #ifdef __DEBUG__
 #define DEBUG_PRINT(x) std::cout << x << std::endl; 
@@ -23,7 +22,7 @@
  * My own Double class wrapper.
  * 
  * Contains 3 doubles. This provides a convenient way of handling 3D coordinates.
- * This class is capable of parsing a string (and/or DString).
+ * This class is capable of parsing a string.
  * Copyright 2010 David Coss
  * Copying and distributing are permitted under the terms of the GNU Public License version 3 (see COPYING or http://www.gnu.org/licenses/gpl.txt).
  */
@@ -40,7 +39,7 @@ class Double
 			 * Creates a Double from a const char* string.
 			 * Note: if the string is not a valid real number, a DavidException is thrown.
 			 * @param _string String given
-			 * @see Double(const DString& newString)
+			 * @see Double(const std::string& newString)
 			 * @throws DavidException.
 			 */
 			Double(const char * _string);
@@ -52,7 +51,7 @@ class Double
 			 * @see Double(const char * _string)
 			 * @throws DavidException.
 			 */
-			Double(const DString& newString);
+			Double(const std::string& newString);
 
 			/**
 			 * Main constructor.
@@ -181,9 +180,9 @@ class Double
 			bool operator>(const double f) const{return (mydoubleValue > f);}
 			
 			/**
-			 * Casts the double to a DString, using toDString();
+			 * Casts the double to a std::string, using tostd::string();
 			 */
-			operator DString() const{return toDString();}
+			operator std::string() const{return str();}
 
 			/**
 			 * Multiplication is performed where each of the 3 components are linearly independent and multiplication is done as an inner product.
@@ -222,7 +221,7 @@ class Double
 			/**
 			 * Determines if the string is a double
 			 * @returns bool
-			 * @see isDouble(DString&)
+			 * @see isDouble(std::string&)
 			 */
 			static bool isDouble(const char *);
 			
@@ -231,19 +230,19 @@ class Double
 			 * @returns bool
 			 * @see isDouble(const char *)
 			 */
-			static bool isDouble(const DString&);
+			static bool isDouble(const std::string&);
 
 			/**
-			 * Gives a DString representation of the Double (first value).
-			 * @return DString.
+			 * Gives a std::string representation of the Double (first value).
+			 * @return std::string.
 			 */
-			DString toDString() const;
+			std::string str() const;
 
 			/**
-			 * Like toDString(), but provides use of an optional, external stream
+			 * Like tostd::string(), but provides use of an optional, external stream
 			 * for conversion. The string version of the Double is left in the stream.
 			 */
-			DString toDString(std::ostringstream& ss) const;
+			std::string str(std::ostringstream& ss) const;
 
 			/**
 			 * Gives the ASCII value of the provided character.
@@ -287,33 +286,33 @@ class Double
 			int toInt();
 
 			/**
-			 * DEPRECATED (too slow): Converts the provided Hexadecimal DString to a number.
+			 * DEPRECATED (too slow): Converts the provided Hexadecimal std::string to a number.
 			 * Note: If the string is not a valid hexadecimal number, a DavidException is thrown.
 			 * @return int
 			 * @see DavidException
 			 * @see intToHex(const int)
 			 */
-			static int hexToInt(DString&);
+			static int hexToInt(std::string&);
 
 			/**
 			 * DEPRECATED(too slow): Converts an integer to a hexadecimal number.
-			 * @return DString.
+			 * @return std::string.
 			 */
-			static DString intToHex(const int);
+			static std::string intToHex(const int);
 
 			/**
 			 * Changes the string to the provied base.
 			 */
-			static int stringToNBase(DString number, int base);
+			static int stringToNBase(std::string number, int base);
 			
 			/**
-			 * Parses a DString to a double
+			 * Parses a std::string to a double
 			 * Note: if the string is not a valid, real number, a DavidException is thrown.
 			 * @param newString String to be converted to a Double.
 			 * @return Double.
 			 * @throws DavidException.
 			 */
-			static Double parseDString(const DString & newString);
+			static Double parseString(const std::string & newString);
 
 			/**
 			 * Gives the modulus(absolute value) of the Double.
@@ -364,23 +363,5 @@ class Double
 const double D_PI = 4*atan(1.0);
 const double D_E = exp(1.0);
 
-/**
- * Functions
- */
-static double max(const double& a, const double& b)
-{
-  if(a > b)
-    return a;
-  
-  return b;
-}
-
-static double min(const double&a, const double& b)
-{
-  if(a < b)
-    return a;
-  
-  return b;
-}
 
 #endif

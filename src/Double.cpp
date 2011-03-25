@@ -21,16 +21,16 @@ Double::Double(const Double& f)
   mydoubleValue3 = f.getValue(2);
 }
 
-Double::Double(const DString& _string)
+Double::Double(const std::string& _string)
 {
   
   mydoubleValue2 = 0.0;
   mydoubleValue3 = 0.0;
-  std::istringstream is(_string.getString());
+  std::istringstream is(string);
 	is >> mydoubleValue;
 	if(is.fail())
 	  {
-	  std::string error = _string + " is not a valid number.";
+	  std::string error = string + " is not a valid number.";
 		throw DavidException(error,DavidException::FORMAT_ERROR_CODE);
 	  }
 
@@ -52,11 +52,11 @@ Double::Double(const double i, const double i2, const double i3)
 
 bool Double::isDouble(const char * bean)
 {
-  DString str(bean);
+  std::string str(bean);
   return isDouble(str);
 }
 
-bool Double::isDouble(const DString& bean)
+bool Double::isDouble(const std::string& bean)
 {
   try
     {
@@ -180,7 +180,7 @@ Double Double::operator-(const double& j)
 
 	std::ostream& operator<<( std::ostream& theStream, const Double& j)
 	{
-		theStream << j.toDString();
+		theStream << j.str();
 		return theStream;
 	}
 	void Double::operator*=(const Double& i)
@@ -202,18 +202,22 @@ int Double::intValue() const
   return (int) returnMe;
 }
 
-DString Double::toDString() const
+std::string Double::str() const
 {
 	std::ostringstream ss;
-	DString temp = toDString(ss);
-	return temp;
+	return str(ss);
 }
 
-DString Double::toDString(std::ostringstream& ss) const
+std::string Double::str(std::ostringstream& ss) const
 {
-	ss << mydoubleValue;
-	DString temp(ss.str());
-    return temp;
+  if(mydoubleValue2 != 0 || mydoubleValue3 != 0)
+    ss << "(";
+  ss << mydoubleValue;
+  if(mydoubleValue2 != 0 || mydoubleValue3 != 0)
+    {
+      ss << ", " << mydoubleValue2 << ", " << mydoubleValue3 << ")";
+    }
+  return ss.str();
 }
 
 	int Double::getIntVal(char ch)
@@ -241,7 +245,7 @@ DString Double::toDString(std::ostringstream& ss) const
 			case '0':
 				return 0;
 			default:
-			  throw DavidException(DString((char) ch)+DString(" is not an integer."),DavidException::FORMAT_ERROR_CODE);
+			  throw DavidException(std::string(ch) + " is not an integer.",DavidException::FORMAT_ERROR_CODE);
 		}
 
 	}
@@ -276,23 +280,20 @@ int Double::toInt()
     }
 }
 
-	int Double::hexToInt(DString& hex)
+	int Double::hexToInt(std::string& hex)
 	{
 		int returnMe = 0;
 		if(hex.contains('.'))
-			throw DavidException(hex+DString(" is not a valid hexadecimal number"),DavidException::FORMAT_ERROR_CODE);
+			throw DavidException(hex+" is not a valid hexadecimal number",DavidException::FORMAT_ERROR_CODE);
 		for(ushort i = 0;i<hex.length();i++)
 		{
 			try
 			{
-				DEBUG_PRINT("hexToInt");
-				DEBUG_PRINT(hex[i]);
-				Double f((DString) hex[i]);
+				Double f((std::string) hex[i]);
 				returnMe += (int) f.doubleValue()*Double::exponent(16,hex.length()-i-1);
 			}
 			catch(DavidException de)
 			{
-				DEBUG_PRINT("hexToInt in catch");
 				double f = 0;
 				if(hex[i] == 'A' || hex[i] == 'a')
 					f = 10;
@@ -307,9 +308,7 @@ int Double::toInt()
 				else if(hex[i] == 'f' || hex[i] == 'F')
 					f = 15;
 				else
-					throw DavidException(DString((char) hex[i])+"is not a valid hexadecimal digit",DavidException::FORMAT_ERROR_CODE);
-				DEBUG_PRINT("adding the number");
-				DEBUG_PRINT(f);
+					throw DavidException(std::string((char) hex[i])+"is not a valid hexadecimal digit",DavidException::FORMAT_ERROR_CODE);
 				returnMe += (int) f*Double::exponent(16,hex.length()-i-1);
 
 			}
@@ -317,14 +316,14 @@ int Double::toInt()
 		return returnMe;
 	}/**/
 
-	DString Double::intToHex(const int arg)
+	std::string Double::intToHex(const int arg)
 	{
 		if(arg < 0)
 			throw DavidException("Argument must be non-negative",DavidException::INVALID_ARGUMENT_ERROR_CODE);
 		if(arg == 0)
-			return DString("0");
+			return "0";
 
-		DString returnMe = "";
+		std::string returnMe = "";
 		int i = arg;
 
 		while(i > 0)
@@ -334,25 +333,25 @@ int Double::toInt()
 			switch(mod)
 			{
 			case(0):case(1):case(2):case(3):case(4):case(5):case(6):case(7):case(8):case(9):
-				returnMe = Double(mod).toDString()+returnMe;
+				returnMe = Double(mod).tostd::string()+returnMe;
 				break;
 			case(10):
-				returnMe = DString("A")+returnMe;
+				returnMe = "A"+returnMe;
 				break;
 			case(11):
-				returnMe = DString("B")+returnMe;
+				returnMe = "B"+returnMe;
 				break;
 			case(12):
-				returnMe = DString("C")+returnMe;
+				returnMe = "C"+returnMe;
 				break;
 			case(13):
-				returnMe = DString("D")+returnMe;
+				returnMe = "D"+returnMe;
 				break;
 			case(14):
-				returnMe = DString("E")+returnMe;
+				returnMe = "E"+returnMe;
 				break;
 			case(15):
-				returnMe = DString("F")+returnMe;
+				returnMe ="F"+returnMe;
 				break;
 
 			}
@@ -364,7 +363,7 @@ int Double::toInt()
 	}
 
 
-Double Double::parseDString(const DString & string)
+Double Double::parsestd::string(const std::string & string)
 {
   return Double(string);
 }
@@ -379,7 +378,11 @@ double Double::getValue(int inty) const
 {
   
   if(inty > 2 || inty < 0)
-    throw DavidException(DString("Not valid index: ")+Double((double) inty).toDString());
+    {
+      std::ostringstream error;
+      error << "Not a valid index: " << inty;
+      throw DavidException(error);
+    }
 
     switch(inty)
     {
@@ -393,8 +396,12 @@ double Double::getValue(int inty) const
       return mydoubleValue3;
       break;
     default:
-      throw DavidException(DString("Not valid index: ")+Double((double) inty).toDString());
+      {
+	std::ostringstream error;
+	error << "Not a valid index: " << inty;
+	throw DavidException(error);
       break;
+      }
     }
 }
 
@@ -402,7 +409,11 @@ void Double::setValue(int inty, double value)
 {
 
   if(inty > 2 || inty < 0)
-    throw DavidException(DString("Not valid index: ")+Double((double) inty).toDString());
+     {
+	std::ostringstream error;
+	error << "Not a valid index: " << inty;
+	throw DavidException(error);
+      }
 
   switch(inty)
     {
@@ -416,31 +427,34 @@ void Double::setValue(int inty, double value)
       mydoubleValue3 = value;
       break;
     default:
-      throw DavidException(DString("Not valid index: ")+Double((double) inty).toDString());
+      {
+	std::ostringstream error;
+	error << "Not a valid index: " << inty;
+	throw DavidException(error);
       break;
+      }
     }
 
 }
 
-int Double::stringToNBase(DString number, int base)
+int Double::stringToNBase(std::string number, int base)
 {
   int i;
   int binary;
 
-  DString& stringBuffer = number;
   i = binary = 0;
 
-  while(stringBuffer[i])
+  while(number[i])
     {
-      stringBuffer[i] -= 48;
-      if(stringBuffer[i] > 16)
-	stringBuffer[i] -= 7;
-      if(stringBuffer[i] >= base)
-	stringBuffer[i] -= 32;
-      if(stringBuffer[i] >= base || stringBuffer[i] < 0)
+      number[i] -= 48;
+      if(number[i] > 16)
+	number[i] -= 7;
+      if(number[i] >= base)
+	number[i] -= 32;
+      if(number[i] >= base || number[i] < 0)
 	break;
       binary *= base;
-      binary += stringBuffer[i];
+      binary += number[i];
       i++;
     }
 
