@@ -12,18 +12,17 @@ AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_RANLIB
 # Checks for libraries.
-
-AC_ARG_WITH([fftw3],AS_HELP_STRING([--with-fftw3%<:%=path%:>%],[Include FFTW3 library]),with_fftw3=${withval},with_fftw3=false)
-[case "$with_fftw3" in
-      yes) fftw3=. ;;
-      no) fftw3=false ;;
-      *) fftw3=${with_fftw3} ;;
+AC_ARG_WITH([zlib],AS_HELP_STRING([--with-zlib<:%=path%:>%],[Include tar/gzip in library]),with_zlib=${withval},with_zlib=true)
+[case "$with_zlib" in
+      yes) zlib=. ;;
+      no) zlib=false ;;
+      *) zlib=${with_zlib} ;;
 esac]
-if test x$fftw3 != xfalse; then
-   AC_MSG_RESULT(Compiling with fftw3)
-   AC_SUBST(FFTW3_PATH,$fftw3)
+if test x$zlib != xfalse; then
+   AC_MSG_RESULT(Compiling with zlib)
 fi
-AM_CONDITIONAL([BUILD_WITH_FFTW3],[test x$fftw3 != xfalse])
+AM_CONDITIONAL([BUILD_WITH_ZLIB],[test x$zlib != xfalse])
+
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h])
