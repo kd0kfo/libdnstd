@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <sstream>
 
 /**
  * Exception Object.
@@ -43,7 +44,7 @@ class DavidException : public std::runtime_error
 
       DavidException(const std::string& error_msg, const std::string& deprecated, const int& error_code) : runtime_error(error_msg),errorCode(error_code){}
 		
-		
+	DavidException(const std::ostringstream& stream, const int& error_code = UNKNOWN_ERROR) : runtime_error(stream.str()), errorCode(error_code){}
 		/**
 		 * Gets the error message.
 		 * @return DString Error message.

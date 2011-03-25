@@ -26,11 +26,11 @@ Double::Double(const std::string& _string)
   
   mydoubleValue2 = 0.0;
   mydoubleValue3 = 0.0;
-  std::istringstream is(string);
+  std::istringstream is(_string);
 	is >> mydoubleValue;
 	if(is.fail())
 	  {
-	  std::string error = string + " is not a valid number.";
+	  std::string error = _string + " is not a valid number.";
 		throw DavidException(error,DavidException::FORMAT_ERROR_CODE);
 	  }
 
@@ -245,7 +245,11 @@ std::string Double::str(std::ostringstream& ss) const
 			case '0':
 				return 0;
 			default:
-			  throw DavidException(std::string(ch) + " is not an integer.",DavidException::FORMAT_ERROR_CODE);
+			  {
+			    std::ostringstream error;
+			    error << ch << " is not an integer.";
+			  throw DavidException(error,DavidException::FORMAT_ERROR_CODE);
+			  }
 		}
 
 	}
@@ -283,14 +287,14 @@ int Double::toInt()
 	int Double::hexToInt(std::string& hex)
 	{
 		int returnMe = 0;
-		if(hex.contains('.'))
+		if(hex.find(".") == hex.npos)
 			throw DavidException(hex+" is not a valid hexadecimal number",DavidException::FORMAT_ERROR_CODE);
 		for(ushort i = 0;i<hex.length();i++)
 		{
 			try
 			{
-				Double f((std::string) hex[i]);
-				returnMe += (int) f.doubleValue()*Double::exponent(16,hex.length()-i-1);
+			  Double f( hex.at(i));
+			  returnMe += (int) f.doubleValue()*Double::exponent(16,hex.length()-i-1);
 			}
 			catch(DavidException de)
 			{
@@ -308,7 +312,11 @@ int Double::toInt()
 				else if(hex[i] == 'f' || hex[i] == 'F')
 					f = 15;
 				else
-					throw DavidException(std::string((char) hex[i])+"is not a valid hexadecimal digit",DavidException::FORMAT_ERROR_CODE);
+				  {
+				    std::ostringstream error;
+				    error << hex.at(i) << "is not a valid hexadecimal digit";
+					throw DavidException(error ,DavidException::FORMAT_ERROR_CODE);
+				  }
 				returnMe += (int) f*Double::exponent(16,hex.length()-i-1);
 
 			}
@@ -333,7 +341,7 @@ int Double::toInt()
 			switch(mod)
 			{
 			case(0):case(1):case(2):case(3):case(4):case(5):case(6):case(7):case(8):case(9):
-				returnMe = Double(mod).tostd::string()+returnMe;
+				returnMe = Double(mod).str()+returnMe;
 				break;
 			case(10):
 				returnMe = "A"+returnMe;
@@ -363,7 +371,7 @@ int Double::toInt()
 	}
 
 
-Double Double::parsestd::string(const std::string & string)
+Double Double::parseString(const std::string & string)
 {
   return Double(string);
 }

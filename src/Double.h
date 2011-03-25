@@ -1,9 +1,10 @@
 #ifndef DOUBLE_CPP
 #define DOUBLE_CPP
 
+#include <string>
 #include <sstream>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 #ifndef atof
 #include <cstdlib>
