@@ -33,7 +33,8 @@ class DavidException : public std::runtime_error
 		      PLANE_OUT_OF_BOUNDS_ERROR_CODE,///<Plane Out of Bounds element requested
 		     DATA_FORMAT_ERROR,
        DLIST_ERROR_CODE,///<Invalid DList Request
-       NETWORK_ERROR_CODE
+       NETWORK_ERROR_CODE,
+	MPI_ERROR_CODE
 		};
   /**
    * Main Constructor.
