@@ -82,12 +82,12 @@ class Double
 			/**
 			 * Adds Double components. Each element is treated as linearly independent.
 			 */
-			Double operator+(const Double&);
+			Double operator+(const Double&)const;
 			
 			/**
 			 * The provided double is added to the first element in the Double class
 			 */
-			Double operator+(const double&);
+			Double operator+(const double&)const;
 			
 			/**
 			 * @see operator+(const Double&)
@@ -99,12 +99,12 @@ class Double
 			 * Subtracts the Double classes
 			 * @see operator+(const Double&)
 			 */
-			Double operator-(const Double&);
+			Double operator-(const Double&)const;
 
 			/**
 			 * Subtracts the provided double from the first double element
 			 */
-			Double operator-(const double&);
+			Double operator-(const double&)const;
 			void operator-=(const Double&);
 			void operator-=(const double);
 
@@ -189,17 +189,17 @@ class Double
 			 * Multiplication is performed where each of the 3 components are linearly independent and multiplication is done as an inner product.
 			 * 
 			 */
-			Double operator*(const Double& f);
+			Double operator*(const Double& f)const;
 			
 			/**
 			 * @see Double operator*(const Double& f);
 			 */
-			Double operator*(const double f);
+			Double operator*(const double f)const;
 
 			/**
 			 * @see Double operator*(const Double& f);
 			 */
-			Double operator/(const double f);
+			Double operator/(const double f)const;
 			
 			friend std::ostream& operator<<( std::ostream&, const Double&);
 

@@ -69,11 +69,11 @@ public:
 	bool operator==(const Complex&) const;
 	bool operator==(const Double&) const;
 	bool operator==(const double&) const;
-	Complex operator+(const Complex&);
+	Complex operator+(const Complex&)const;
 	void operator+=(const Complex&);
-	Complex operator-(const Complex&);
+	Complex operator-(const Complex&)const;
 	void operator-=(const Complex&);
-	Complex operator*(const Complex&);///<Performs the Complex Modulus Squared
+	Complex operator*(const Complex&)const;///<Performs the Complex Modulus Squared
 	void operator*=(const Complex&);
 
 	double getRealPart() const{return Re;}

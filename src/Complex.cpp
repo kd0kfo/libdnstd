@@ -195,7 +195,7 @@ void Complex::setValue(int i, Complex value)
 }
 
 
-Complex Complex::operator+(const Complex& rhs)
+Complex Complex::operator+(const Complex& rhs)const
 {
   return Complex(Re+rhs.getRealPart(),Im+rhs.getImaginaryPart());
 }
@@ -205,7 +205,7 @@ void Complex::operator+=(const Complex& rhs)
   Re += rhs.getRealPart();
   Im += rhs.getImaginaryPart();
 }
-Complex Complex::operator-(const Complex& rhs)
+Complex Complex::operator-(const Complex& rhs)const
 {
    return Complex(Re-rhs.getRealPart(),Im-rhs.getImaginaryPart());
 }
@@ -216,7 +216,7 @@ void Complex::operator-=(const Complex& rhs)
    Im += rhs.getImaginaryPart();
 }
 
-Complex Complex::operator*(const Complex& rhs)
+Complex Complex::operator*(const Complex& rhs)const
 {
   
   double real = Re*rhs.getRealPart()-Im*rhs.getImaginaryPart();

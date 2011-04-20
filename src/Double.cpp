@@ -90,7 +90,7 @@ double Double::exponent(double i, int power)
 }
 
 
-Double Double::operator+(const Double& j)
+Double Double::operator+(const Double& j)const
 {
   Double returnMe;
   for(int i = 0;i<3;i++)
@@ -98,7 +98,7 @@ Double Double::operator+(const Double& j)
   return returnMe;
 }
 
-Double Double::operator+(const double& j)
+Double Double::operator+(const double& j)const
 {
   Double returnMe(getValue(0),getValue(1),getValue(2));
   returnMe.setValue(0,mydoubleValue + j);
@@ -116,7 +116,7 @@ Double Double::operator+(const double& j)
 		setValue(0,mydoubleValue + j);
 	}
 
-Double Double::operator-(const Double& j)
+Double Double::operator-(const Double& j)const
 {
   Double returnMe;
   for(int i = 0;i<3;i++)
@@ -124,7 +124,7 @@ Double Double::operator-(const Double& j)
   return returnMe;
 }
 
-Double Double::operator-(const double& j)
+Double Double::operator-(const double& j)const
 {
   Double returnMe(getValue(0),getValue(1),getValue(2));
   returnMe.setValue(0,mydoubleValue - j);
@@ -470,7 +470,7 @@ int Double::stringToNBase(std::string number, int base)
 }
 
 
-Double Double::operator*(const Double& f)
+Double Double::operator*(const Double& f)const
 {
   Double returnMe(*this);
   for(int i = 0;i<3;i++)
@@ -479,7 +479,7 @@ Double Double::operator*(const Double& f)
   return returnMe;
 }
 
-Double Double::operator*(const double f)
+Double Double::operator*(const double f)const
 {
   Double returnMe(*this);
   for(int i = 0;i<3;i++)
@@ -488,7 +488,7 @@ Double Double::operator*(const double f)
   return returnMe;
 }
 
-Double Double::operator/(const double f)
+Double Double::operator/(const double f)const
 {
   Double returnMe(*this);
   for(int i = 0;i<3;i++)
