@@ -4,6 +4,7 @@
 #include <string>
 #include <unistd.h>
 #include <limits.h>
+#include <cstring>
 #include <errno.h>
 #include "DavidException.h"
 

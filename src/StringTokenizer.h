@@ -112,7 +112,7 @@ namespace utils{
     std::string delim;
     std::string string;
     bool keepDelim;
-    ushort index;
+    size_t index;
 
   };
 }
