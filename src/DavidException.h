@@ -16,26 +16,27 @@ class DavidException : public std::runtime_error
  public:
   enum{UNKNOWN_ERROR = 1,
        IMAGINARY_NUMBER_ERROR_CODE,///<Incorrect Imaginary Number Format
-		     DEFAULT_ERROR_CODE,///<Default error code
-		      HASHMAP_ERROR_CODE,///<HashMap Error code
-		      LinAl_ERROR_CODE,///<LinAl Error Code
-		      DARRAY_ERROR_CODE,///<DArray Error Code
-		      STRING_TOKENIZER_ERROR_CODE,///<String Tokenizer Error
-		      MATRIX_ERROR_CODE,
-		     LTREE_ERROR_CODE,///<LinAl Error Code
-		      DSTACK_ERROR_CODE,
-		      FORMAT_ERROR_CODE,
-		      ARRAYLIST_ERROR_CODE,
-		      ALPARS_ERROR_CODE,///<LinAl Error Code
-		      DHashMap_ERROR_CODE,
-		      INVALID_ARGUMENT_ERROR_CODE,
-		      IO_ERROR_CODE,///< Input and/or Output error
-		      PLANE_OUT_OF_BOUNDS_ERROR_CODE,///<Plane Out of Bounds element requested
-		     DATA_FORMAT_ERROR,
+       DEFAULT_ERROR_CODE,///<Default error code
+       HASHMAP_ERROR_CODE,///<HashMap Error code
+       LinAl_ERROR_CODE,///<LinAl Error Code
+       DARRAY_ERROR_CODE,///<DArray Error Code
+       STRING_TOKENIZER_ERROR_CODE,///<String Tokenizer Error
+       MATRIX_ERROR_CODE,
+       LTREE_ERROR_CODE,///<LinAl Error Code
+       DSTACK_ERROR_CODE,
+       FORMAT_ERROR_CODE,
+       ARRAYLIST_ERROR_CODE,
+       ALPARS_ERROR_CODE,///<LinAl Error Code
+       DHashMap_ERROR_CODE,
+       INVALID_ARGUMENT_ERROR_CODE,
+       IO_ERROR_CODE,///< Input and/or Output error
+       PLANE_OUT_OF_BOUNDS_ERROR_CODE,///<Plane Out of Bounds element requested
+       DATA_FORMAT_ERROR,
        DLIST_ERROR_CODE,///<Invalid DList Request
        NETWORK_ERROR_CODE,
-	MPI_ERROR_CODE
-		};
+       NULL_POINTER,
+       MPI_ERROR_CODE
+  };
   /**
    * Main Constructor.
    * This is the default constructor.
