@@ -35,7 +35,9 @@ class DavidException : public std::runtime_error
        DLIST_ERROR_CODE,///<Invalid DList Request
        NETWORK_ERROR_CODE,
        NULL_POINTER,
-       MPI_ERROR_CODE
+       MPI_ERROR_CODE,
+       INVALID_XML_REQUEST,
+       BAD_XML_TAG
   };
   /**
    * Main Constructor.

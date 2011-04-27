@@ -31,3 +31,31 @@ std::string utils::get_hostname() throw (DavidException)
 
   return hostname;
 }
+
+std::string utils::trimString(const std::string& theString)
+{
+    std::string bean = theString;
+    size_t lastpos = bean.find_last_not_of(" \t");
+    size_t firstpos = bean.find_first_not_of(" \t");
+    if(firstpos == bean.npos || lastpos == bean.npos)
+    {
+        bean = "";
+    }
+    else
+        bean = bean.substr(firstpos,lastpos - firstpos + 1);
+
+    return bean;
+}
+
+
+std::string utils::getNextLine(std::iostream& file) throw (DavidException)
+{
+    if(!file.good())
+      throw DavidException("Could not read from file",DavidException::IO_ERROR_CODE);
+
+    std::string returnMe;
+    getline(file,returnMe);
+    return returnMe;
+}
+
+
