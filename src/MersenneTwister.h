@@ -1,3 +1,5 @@
+// ADDED to the library sometime after May of 2010
+//
 // MersenneTwister.h
 // Mersenne Twister random number generator -- a C++ class MTRand
 // Based on code by Makoto Matsumoto, Takuji Nishimura, and Shawn Cokus
@@ -46,14 +48,6 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-
-// The original code included the following notice:
-// 
-//     When you use this, send an email to: m-mat@math.sci.hiroshima-u.ac.jp
-//     with an appropriate reference to your work.
-// 
-// It would be nice to CC: wagnerr@umich.edu and Cokus@math.washington.edu
-// when you write.
 
 #ifndef MERSENNETWISTER_H
 #define MERSENNETWISTER_H
