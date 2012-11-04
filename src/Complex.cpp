@@ -139,7 +139,11 @@ Complex Complex::parseString(const std::string & string)
   Re = Im = 0;
   int middleOpLoc = -1;
   int iLoc = -1;
-  for(int i = 0,size = string.size();i< size;i++)
+  int i = 0;
+  
+  if(string[0] == '+' || string[0] == '-')
+    i = 1;
+  for(int size = string.size();i< size;i++)
     {
       if(string[i] == 'i' || string[i] == 'I')
 	iLoc = i;
@@ -163,6 +167,8 @@ Complex Complex::parseString(const std::string & string)
 
   if(string[0] == '-')
     Re = Double(string.substr(1,middleOpLoc-1)).doubleValue();
+  else if(string[0] == '+')
+    Re = Double(string.substr(0,middleOpLoc-1)).doubleValue();
   else
     Re = Double(string.substr(0,middleOpLoc)).doubleValue();
 
