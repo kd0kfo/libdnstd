@@ -75,6 +75,14 @@ class Double
 			Double(const int i){mydoubleValue = (double) i;mydoubleValue2 = 0; mydoubleValue3 = 0;}
 
 			/**
+			 * Int to Double constructor.
+			 * This constructor casts the provided int as a double and stores it.
+			 * @param i int given to become a Double.
+			 */
+			Double(const size_t i){mydoubleValue = (double) i;mydoubleValue2 = 0; mydoubleValue3 = 0;}
+
+
+			/**
 			 * Copy Constructor
 			 */
 			Double(const Double&);

@@ -57,6 +57,7 @@ class DavidException : public std::runtime_error
        MPI_ERROR_CODE,
        INVALID_XML_REQUEST,
        BAD_XML_TAG,
+       ALLOC_ERROR,
        NUMBER_OF_EXCEPTIONS
   };
   /**
