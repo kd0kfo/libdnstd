@@ -158,6 +158,16 @@ namespace math
      * @param value new Complex Value
      */
     void setValue(int i, Complex value);
+    
+    /**
+     * Sets the value of the object to the new value.
+     * Unlike the (int, Complex) form of this function,
+     * the index is used. Here, the index denotes Real Part
+     * of index = 0 and Imaginary part if index = 1.
+     * 
+     * @param value new Complex Value
+     */
+    void setValue(int i, double value);
 
   private:
     double Re;

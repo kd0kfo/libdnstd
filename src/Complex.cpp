@@ -222,6 +222,14 @@ void Complex::setValue(int i, Complex value)
   Im = value.getImaginaryPart();
 }
 
+void Complex::setValue(int i, double value)
+{
+  if(i == 0)
+    Re = value;
+  else if(i == 1)
+    Im = value;
+}
+
 
 Complex Complex::operator+(const Complex& rhs)const
 {
