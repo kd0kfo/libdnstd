@@ -77,7 +77,7 @@ libdnstd_a_LIBADD =
 am__libdnstd_a_SOURCES_DIST = Binary.cpp Complex.cpp \
 	DavidException.cpp Double.cpp DRandom.cpp StringTokenizer.cpp \
 	NumericalIntegration.cpp utils.cpp XMLNode.cpp XMLParser.cpp \
-	Zipper.cpp
+	version.cpp Zipper.cpp
 @BUILD_WITH_ZLIB_TRUE@am__objects_1 = libdnstd_a-Zipper.$(OBJEXT)
 am_libdnstd_a_OBJECTS = libdnstd_a-Binary.$(OBJEXT) \
 	libdnstd_a-Complex.$(OBJEXT) \
@@ -86,7 +86,8 @@ am_libdnstd_a_OBJECTS = libdnstd_a-Binary.$(OBJEXT) \
 	libdnstd_a-StringTokenizer.$(OBJEXT) \
 	libdnstd_a-NumericalIntegration.$(OBJEXT) \
 	libdnstd_a-utils.$(OBJEXT) libdnstd_a-XMLNode.$(OBJEXT) \
-	libdnstd_a-XMLParser.$(OBJEXT) $(am__objects_1)
+	libdnstd_a-XMLParser.$(OBJEXT) libdnstd_a-version.$(OBJEXT) \
+	$(am__objects_1)
 libdnstd_a_OBJECTS = $(am_libdnstd_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -102,7 +103,7 @@ DIST_SOURCES = $(am__libdnstd_a_SOURCES_DIST)
 am__libdnstd_a_include_HEADERS_DIST = Binary.h Complex.h \
 	DavidException.h Double.h DRandom.h StringTokenizer.h \
 	NumericalIntegration.h MersenneTwister.h RBTree.h utils.h \
-	XMLNode.h XMLParser.h Zipper.h
+	XMLNode.h XMLParser.h version.h Zipper.h
 HEADERS = $(libdnstd_a_include_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -147,7 +148,6 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
-PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 RANLIB = @RANLIB@
@@ -203,13 +203,13 @@ libdnstd_adir = $(libdir)
 libdnstd_a_SOURCES = Binary.cpp Complex.cpp DavidException.cpp \
 	Double.cpp DRandom.cpp StringTokenizer.cpp \
 	NumericalIntegration.cpp utils.cpp XMLNode.cpp XMLParser.cpp \
-	$(am__append_1)
+	version.cpp $(am__append_1)
 libdnstd_a_CPPFLAGS = -Wall
 libdnstd_a_includedir = $(includedir)/libdnstd
 libdnstd_a_include_HEADERS = Binary.h Complex.h DavidException.h \
 	Double.h DRandom.h StringTokenizer.h NumericalIntegration.h \
 	MersenneTwister.h RBTree.h utils.h XMLNode.h XMLParser.h \
-	$(am__append_2)
+	version.h $(am__append_2)
 all: all-am
 
 .SUFFIXES:
@@ -298,6 +298,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-XMLParser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-Zipper.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdnstd_a-version.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -452,6 +453,20 @@ libdnstd_a-XMLParser.obj: XMLParser.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='XMLParser.cpp' object='libdnstd_a-XMLParser.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-XMLParser.obj `if test -f 'XMLParser.cpp'; then $(CYGPATH_W) 'XMLParser.cpp'; else $(CYGPATH_W) '$(srcdir)/XMLParser.cpp'; fi`
+
+libdnstd_a-version.o: version.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-version.o -MD -MP -MF $(DEPDIR)/libdnstd_a-version.Tpo -c -o libdnstd_a-version.o `test -f 'version.cpp' || echo '$(srcdir)/'`version.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libdnstd_a-version.Tpo $(DEPDIR)/libdnstd_a-version.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='version.cpp' object='libdnstd_a-version.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-version.o `test -f 'version.cpp' || echo '$(srcdir)/'`version.cpp
+
+libdnstd_a-version.obj: version.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-version.obj -MD -MP -MF $(DEPDIR)/libdnstd_a-version.Tpo -c -o libdnstd_a-version.obj `if test -f 'version.cpp'; then $(CYGPATH_W) 'version.cpp'; else $(CYGPATH_W) '$(srcdir)/version.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libdnstd_a-version.Tpo $(DEPDIR)/libdnstd_a-version.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='version.cpp' object='libdnstd_a-version.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libdnstd_a-version.obj `if test -f 'version.cpp'; then $(CYGPATH_W) 'version.cpp'; else $(CYGPATH_W) '$(srcdir)/version.cpp'; fi`
 
 libdnstd_a-Zipper.o: Zipper.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdnstd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libdnstd_a-Zipper.o -MD -MP -MF $(DEPDIR)/libdnstd_a-Zipper.Tpo -c -o libdnstd_a-Zipper.o `test -f 'Zipper.cpp' || echo '$(srcdir)/'`Zipper.cpp
@@ -688,6 +703,12 @@ uninstall-am: uninstall-libLIBRARIES \
 	uninstall-am uninstall-libLIBRARIES \
 	uninstall-libdnstd_a_includeHEADERS
 
+
+version.cpp: 
+	git rev-parse HEAD | awk ' BEGIN {print "#include \"version.h\""} {print "const char * libdnstd::build_git_sha = \"" $$0"\";"} END {}' > version.cpp
+	date | awk 'BEGIN {} {print "const char * libdnstd::build_git_time = \""$$0"\";"} END {} ' >> version.cpp
+
+.PHONY: version.cpp
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
