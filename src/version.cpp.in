@@ -1,0 +1,3 @@
+#include "version.h"
+const char * libdnstd::build_git_sha = "@BUILD_GIT_SHA@";
+const char * libdnstd::build_git_time = "@BUILD_TIME@";
