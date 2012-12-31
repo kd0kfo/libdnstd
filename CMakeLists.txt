@@ -28,4 +28,4 @@ add_library(dnstd src/Binary.cpp src/Complex.cpp src/DavidException.cpp src/Doub
 
 install(TARGETS dnstd DESTINATION lib)
 FILE(GLOB headers "${PROJECT_SOURCE_DIR}/src/*.h")
-install(FILES ${headers} DESTINATION include)
+install(FILES ${headers} DESTINATION include/libdnstd)
