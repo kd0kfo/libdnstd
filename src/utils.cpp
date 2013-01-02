@@ -42,18 +42,41 @@ std::string utils::upper_case(std::string str)
 
 std::string utils::get_hostname() throw (DavidException)
 {
-  char hostname[HOST_NAME_MAX];
+  long hostname_max;
+  char *hostname = NULL;
+  int retval;
+  std::string returnme;
+  hostname_max = sysconf(_SC_HOST_NAME_MAX);
   
-  int retval = gethostname(hostname,HOST_NAME_MAX);
+  if(hostname_max < 0)
+    {
+      std::ostringstream error;
+      error << "utils:get_hostname: Could not get size of hostname"
+	    << "Reason: " << strerror(errno);
+      throw DavidException(error,DavidException::UNKNOWN_ERROR);
+    }
+
+  hostname = (char*)malloc(sizeof(char)*hostname_max);
+  if(hostname == NULL)
+    {
+      std::ostringstream error;
+      error << "utils:get_hostname: Could not allocate memory for hostname"
+	    << "Reason: " << strerror(errno);
+      throw DavidException(error,DavidException::ALLOC_ERROR);
+    }
+  retval = gethostname(hostname,hostname_max);
   if(retval)
     {
       std::ostringstream error;
+      free(hostname);
       error << "utils:get_hostname: Could not get hostname."
 	    << "Reason: " << strerror(errno);
       throw DavidException(error,DavidException::NETWORK_ERROR_CODE);
     }
-
-  return hostname;
+  
+  returnme = hostname;
+  free(hostname);
+  return returnme;
 }
 
 std::string utils::trimString(const std::string& theString)

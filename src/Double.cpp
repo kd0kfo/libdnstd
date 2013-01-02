@@ -289,7 +289,7 @@ int Double::toInt()
 		int returnMe = 0;
 		if(hex.find(".") == hex.npos)
 			throw DavidException(hex+" is not a valid hexadecimal number",DavidException::FORMAT_ERROR_CODE);
-		for(ushort i = 0;i<hex.length();i++)
+		for(size_t i = 0;i<hex.length();i++)
 		{
 			try
 			{
