@@ -23,6 +23,7 @@
 #include <limits.h>
 #include <cstring>
 #include <errno.h>
+#include <cstdlib>
 
 std::string utils::lower_case(std::string str)
 {
